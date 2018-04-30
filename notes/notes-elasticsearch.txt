@@ -1,0 +1,1000 @@
+    3  cd ../
+    4  ls -al
+    5  cd yum_data/
+    6  ls -al
+    7  cd packages
+    8  ls -al
+    9  ls -la *elastic*
+   10  cd /var/jmg/simp-core
+   11  ls -al
+   12  cd src/assets/simp/
+   13  vim build/simp.spec 
+   14  cd ../../
+   15  cd puppet/modules/
+   16  ls -al
+   17  cd elasticsearch/
+   18  ls -al
+   19  vim metadata.json 
+   20  exit
+   21  ssh tastypuppet
+   22  cd62
+   23  cd ../../
+   24  cd assets/simp
+   25  ls -al
+   26  cd build/
+   27  ls -al
+   28  vim simp.spec 
+   29  cd ../../
+   30  ls -al
+   31  cd ../
+   32  ls -al
+   33  cd ../
+   34  ls -al
+   35  cd src
+   36  grep -ri elasticsearch
+   37  grep -ri elasticsearch | grep rpm
+   38  sudo sudosh
+   39  sudo sudosh
+   40  ssh store04
+   41  ssh speedy01
+   42  ssh es1
+   43  cd /var/jmg/simp-core
+   44  ls -al
+   45  cp Puppetfile.tracking Puppetfile.tracking.jmg
+   46  vim Puppetfile.tracking.jmg
+   47  ls -al
+   48  rm ff.tar 
+   49  man ls
+   50  ls -Sla
+   51  l s-l a/net/ISO
+   52  ls -la /net/ISO
+   53  ls -la /net/ISO/Releases/
+   54  ls -al
+   55  ls -la /net/ISO/Distribution_ISOs/
+   56  mkdir /net/misc/PE
+   57  mv puppet-enterprise-201* /net/misc/PE
+   58  mkdir SIMP62
+   59  cd SIMP62
+   60  cp /var/jmg/code/6.2/simp-core/Puppetfile.tracking .
+   61  vim Puppetfile.tracking 
+   62  ssh speedy01
+   63  cd /var/jmg
+   64  ls -al
+   65  cd
+   66  ls -al
+   67  cd SIMP62
+   68  ls -al
+   69  vim Puppetfile.tracking 
+   70  cd ..
+   71  find . -name Puppetfil*
+   72  sudos udosh
+   73  sudo sudosh
+   74  cd /var/jmg/simp-core
+   75  ls -al
+   76  bundle exec rake -T
+   77  bundle install
+   78  bundle exec rake -T
+   79  bunde exec rake deps:record -d
+   80  bundle exec rake deps:record -d
+   81  bundle exec rake  -d deps:record
+   82  bundle exec rake  -D deps:record
+   83  bundle exec rake deps:record[simp62rc,tracking]
+   84  ls -al
+   85  vim Puppetfile.simp62rc 
+   86  vim Puppetfile.tracking
+   87  cd /var/jmg
+   88  ls -al
+   89  cd -
+   90  ls -al
+   91  vim Puppetfile.tracking
+   92  cd /var/jmg
+   93  ls -al
+   94  cd
+   95  ls -al
+   96  cd SIMP62
+   97  ls -al
+   98  vim Puppetfile.tracking 
+   99  cd ..
+  100  find . -name Puppetfil*
+  101  ssh speedy01
+  102  cd /var/jmg
+  103  ls -al
+  104  cd /var/jmg
+  105  cd62
+  106  ls -al
+  107  cd ../../build
+  108  cd ../../
+  109  cd ../
+  110  cd build/distributions/CentOS/
+  111  ls -al
+  112  cd 7/
+  113  ls -al
+  114  cd x86_64/yum_data/
+  115  ls -al
+  116  vim packages.yaml 
+  117  cd /tmp
+  118  cd x
+  119  mkdir ddd
+  120  mkdir pkg
+  121  touch x 
+  122  cd pkg
+  123  touch f g h f 
+  124  mkdir ../noarch
+  125  touch ../noarch/ttt ../noarch/ddd
+  126  cd ../noarch/
+  127  irb
+  128  ls -al
+  129  cd ../pkg
+  130  ls -al
+  131  unlink ddd 
+  132  unlink ttt
+  133  cd ../noarch/
+  134  irb
+  135  cd ../pkg
+  136  ls -al
+  137  ls a-l
+  138  ls -al
+  139  vim ~/scripts/relink/rb
+  140  vim ~/scripts/relink.rb
+  141  ls -al
+  142  cd ../
+  143  mv pkg x86_64
+  144  cd noarch/
+  145  touch rrr  sss fff
+  146  ls -la ~/scripts
+  147  vim ~/scripts/compare_latest_tag.rb 
+  148  vim ~/scripts/relink.rb 
+  149  chmod 755 ~/scripts/relink.rb
+  150  ~/scripts/relink.rb
+  151  vim ~/scripts/relink.rb 
+  152  ~/scripts/relink.rb
+  153  cd ../x86_64/
+  154  ls -al
+  155  vim ~/scripts/relink.rb 
+  156  cd ../noarch/
+  157  wget -O simp-vendored-r10k-gem-puppet_forge-2.1.5-0.noarch.rpm https://packagecloud.io/simp-project/6_X/packages/el/7/simp-vendored-r10k-gem-puppet_forge-2.1.5-0.noarch.rpm
+  158  ls -al
+  159  chmod 640 *
+  160  sudo sudosh
+  161  cd62
+  162  cd ../../../build/distributions/CentOS/7/x86_64/yum_data/
+  163  vim packages.yaml 
+  164  cp packages.yaml /tmp/stuff
+  165  vim /tmp/stuff
+  166  vim packages.yaml 
+  167  sudo sudosh
+  168  sudo sudosh
+  169  ssh tastypuppet
+  170  sudo sudosh
+  171  exit
+  172  sudo sudosh
+  173  sudo sudosh
+  174  cd /var/jmg
+  175  ls -al
+  176  cd simp-core
+  177  ls -al
+  178  vim Puppetfile.simp62rc 
+  179  exit
+  180  cd62
+  181  cd ../../.././
+  182  cd /var/jmg/6.1
+  183  cd /var/jmg/code/6.1
+  184  ls -al
+  185  cd simp-core/
+  186  ls -al
+  187  cd build/
+  188  ls -al
+  189  cd distributions/
+  190  sl a-l
+  191  ls -al
+  192  cd CentOS/
+  193  ls -al
+  194  cd 7
+  195  ls -la
+  196  cd x86_64/
+  197  ls -al
+  198  cd yum_data/
+  199  ls -al
+  200  cd packages
+  201  ls -al
+  202  ls -la el*
+  203  ls -la
+  204  graf*
+  205  ls -la graf*
+  206  ls -la log*
+  207  ssh es1
+  208  cd /var/jmh/r10k
+  209  cd /var/jmg/r10k
+  210  l s-al
+  211  ls -al
+  212  git clone git@gitlab.tasty.bacon:tasty.bacon/tastypuppet-site.git
+  213  ls -al
+  214  cd tastypuppet-site/
+  215  ls -al
+  216  git branch -a
+  217  git checkout remotes/origin/simp_6_1_0_pre
+  218  git status
+  219  git checkout simp_6_1_0_pre
+  220  git status
+  221  ls -al
+  222  cd manifests/
+  223  ls -al
+  224  cd ../../
+  225  ls -al
+  226  cd tastypuppet-control-repo/
+  227  git remote -v
+  228  git pull origin simp_6_1_0_pre
+  229  git status
+  230  vim Puppetfile 
+  231  git checkout Puppetfile
+  232  ls -al
+  233  git status
+  234  git checkout simp_6_1_0_pre
+  235  git pull origin simp_6_1_0_pre
+  236  ls -al
+  237  cd hieradata/
+  238  ls -al
+  239  cd hosts
+  240  ls -al
+  241  vim es1.tasty.bacon.yaml 
+  242  vim es2.tasty.bacon.yaml 
+  243  rm es2.tasty.bacon.yaml 
+  244  vim grafana.tasty.bacon.yaml 
+  245  git status
+  246  git rm es2.tasty.bacon.yaml
+  247  git add es1.tasty.bacon.yaml grafana.tasty.bacon.yaml
+  248  git status
+  249  git commit -m 'removing elg testing repos from elg machines'
+  250  git push origin simp_6_1_0_pre
+  251  cd ../../
+  252  cd ../
+  253  cd tastypuppet-site/
+  254  ls -al
+  255  git checkout simp_6_1_0_pre
+  256  ls -al
+  257  cd manifests/
+  258  sl -al
+  259  ls -al
+  260  cd elg
+  261  ls -al
+  262  cd ../
+  263  git rm elg/repo_elg_testing.pp 
+  264  git rm elg
+  265  ls -al
+  266  git commit -m 'removing elg testing manifests'
+  267  git status
+  268  git push origin simp_6_1_0_pre
+  269  pwd
+  270  cd ../../../
+  271  pwd
+  272  cd r10k/
+  273  ls -al
+  274  cd tastypuppet-control-repo/
+  275  ls -al
+  276  git status
+  277  git checkout -b simp_6_2_0
+  278  git status
+  279  ls -al
+  280  vim Puppetfile 
+  281  scp speedy01:/var/jmg/simp-core/Puppetfile.tracking .
+  282  ls -al
+  283  vim Puppetfile.tracking 
+  284  diff Puppetfile Puppetfile.tracking 
+  285  vim Puppetfile.tracking 
+  286  ls -al
+  287  vim Puppetfile
+  288  cp Puppetfile.tracking Puppetfile.jmg
+  289  vim Puppetfile.jmg 
+  290  mv Puppetfile.jmg Puppetfile
+  291  ls -al
+  292  rm Puppetfile.tracking 
+  293  git status
+  294  git add Puppetfile
+  295  ls -al
+  296  vim README.md 
+  297  vim environment.conf 
+  298  vim README.md 
+  299  ls -al
+  300  cd hieradata/
+  301  ls -al
+  302  cd ../
+  303  ls -al
+  304  cd hieradata/
+  305  ls -al
+  306  cd ../
+  307  ls -al
+  308  git status
+  309  git add environment.conf 
+  310  git commit -m 'copy operational environment to 6_2_0 and update Puppetfile to point to 6.2 refs'
+  311  git push origin simp_6_2_0
+  312  vim README.md 
+  313  cd ../
+  314  ls -al
+  315  cd tastypuppet-site
+  316  ls -al
+  317  git status
+  318  git checkout -b simp_6_2_0
+  319  ls -al
+  320  cd manifests/
+  321  ls -al
+  322  vim tftpboot.pp 
+  323  git status
+  324  git push origin simp_6_2_0
+  325  cd /var/jmg/r10k
+  326  ls -al
+  327  cd tastypuppet-control-repo/
+  328  ls -al
+  329  vim Puppetfile 
+  330  git status
+  331  git add Puppetfile
+  332  git commit -m 'fix bad ref in Puppetfile'
+  333  git push origin simp_6_2_0
+  334  sudo sudosh
+  335  exit
+  336  cd /var/jmg/simp-core/
+  337  ls -al
+  338  vim Puppetfile.simp62rc
+  339  sudo sudosh
+  340  ssh speedy01
+  341  ssh speedy05
+  342  ssh speedy01
+  343  ssh tastypuppet
+  344  cd /var/jmg/r10k/
+  345  ls -al
+  346  cd tastypuppet-control-repo/
+  347  vim Puppetfile 
+  348  pwd
+  349  git status
+  350  vim Puppetfile 
+  351  vim README.md 
+  352  git status
+  353  git add Puppetfile README.md 
+  354  git commit -m 'Removed simp:site from Puppetfile because it was writing over the r10k site module'
+  355  git push origin simp_6_2_0
+  356  vim README.md 
+  357  git add Puppetfile README.md 
+  358  git commit -m 'update README'
+  359  git push origin simp_6_2_0
+  360  vim README.md 
+  361  git status
+  362  pwd
+  363  cd hieradata/
+  364  ls -al
+  365  cd hosts
+  366  ls -al
+  367  vim speedy05.tasty.bacon.yaml 
+  368  cd ../../
+  369  cd ../tastypuppet-site/
+  370  ls -al
+  371  cd manifests/
+  372  ls -al
+  373  cd vm
+  374  ls -al
+  375  vim virtualbox.pp 
+  376  pwd
+  377  cd ../
+  378  cd ../../
+  379  cd tastypuppet-control-repo/
+  380  vim Puppetfile 
+  381  vim README.md 
+  382  git add Puppetfile README.md 
+  383  git commit -m 'more changes to Puppetfile and README'
+  384  git push origin simp_6_2_0
+  385  sudo sudosh
+  386  vim Puppetfile 
+  387  sudo sudosh
+  388  sudo sudosh
+  389  sudo sudosh
+  390  ssh ws154
+  391  ssh ws156
+  392  cd /var/jmg/simp-c
+  393  cd /var/jmg/simp-core
+  394  vim Puppetfile.tracking
+  395  sudo sudosh
+  396  ssh speedy05
+  397  sudo sudosh
+  398  ssh speedy01
+  399  ssh store04
+  400  sudo sudosh
+  401  sudo sudosh
+  402  ssh tastypuppet
+  403  sudo sudosh
+  404  cd /var/jmg/r10k
+  405  ls -al
+  406  cd tastypuppet-control-repo/
+  407  ls -al
+  408  vim README.md 
+  409  ssh tastypuppet
+  410  cd62
+  411  grep -ri archive | grep metadata
+  412  cd62
+  413  grep -ri concat | grep metadata.json
+  414  vim simp/metadata.json
+  415  ssh ws156
+  416  for x in `ls /usr/local/bin`; do echo $x; done
+  417  bc
+  418  exit
+  419  sudo sudosh
+  420  exit
+  421  cd /var/jmg/simp-core
+  422  ls -al
+  423  vim Puppetfile.simp62rc 
+  424  vim Puppetfile.tracking
+  425  vim Puppetfile.simp62rc 
+  426  ssh speedy01
+  427  exit
+  428  sudo sudosh
+  429  sudo sudosh
+  430  sudos udosh
+  431  sudo sudosh
+  432  exit
+  433  cd62
+  434  cd ../../
+  435  cd ../
+  436  vim Puppetfile.tracking 
+  437  ssh speedy01
+  438  ssh ws154
+  439  ssh ws156
+  440  ping 10.0.71.248
+  441  ping 10.0.71.114
+  442  nslookup 10.0.71.248
+  443  sudo sudosh
+  444  ssh store04
+  445  sudo sudosh
+  446  sudo sudosh
+  447  sudo sudosh
+  448  exit
+  449  sudo sudosh
+  450  exit
+  451  ssh store04
+  452  ssh store03
+  453  sudos udosh
+  454  sudo sudosh
+  455  vbox list vms
+  456  sudo sudosh
+  457  ssh blade05
+  458  ssh store04
+  459  ssh store01
+  460  cd /var/jmg/r10k
+  461  ls
+  462  cd tastypuppet-control-repo/
+  463  ls -al
+  464  git status
+  465  vim Puppetfile 
+  466  git branch -v
+  467  cd ../
+  468  mv tastypuppet-control-repo/ tastypuppet-control-repo-old
+  469  git clone git@gitlab.tasty.bacon:tasty.bacon/tastypuppet-control-repo.git
+  470  git staut
+  471  git status
+  472  cd tastypuppet-control-repo
+  473  ls -al
+  474  git status
+  475  git checkout simp_6_1_0_pre
+  476  git checkout production
+  477  git tracking --help
+  478  man git
+  479  git --whatchanged
+  480  git checkout simp_6_2_0
+  481  git checkout -b simp_6_2_0_upgraderpms
+  482  mv Puppetfile Puppetfile.orig
+  483  cp /var/jmg/code/6.1
+  484  cp /var/jmg/code/6.1/simp-core/Puppetfile.tracking  Puppetfile
+  485  diff Puppetfile.orig Puppetfile.track
+  486  ls -al
+  487  diff Puppetfile.orig Puppetfile
+  488  cd /var/jmg/code/6.1/simp-core
+  489  git status
+  490  git branch -v
+  491  git branch --help
+  492  git branch -a
+  493  cd ../
+  494  mb simp-core simp-core-orig
+  495  mv simp-core simp-core-orig
+  496  gclone simp-core
+  497  cd simp-core
+  498  git branch -a
+  499  git tag
+  500  git checkout --help
+  501  git checkout 6.1.0-0
+  502  ls -la
+  503  vim Puppetfile.stable 
+  504  vim Puppetfile.tracking 
+  505  cp Puppetfile.tracking /var/jmg/r10k/tastypuppet-control-repo/Puppetfile
+  506  cd /var/jmg/r10k/tastypuppet-control-repo
+  507  ls -al
+  508  vim Puppetfile
+  509  git status
+  510  rm Puppetfile.orig 
+  511  git status
+  512  vim Puppetfile 
+  513  git branch -a
+  514  git checkout simp_6_1_rpmupdates
+  515  git checkout -b simp_6_1_rpmupdates
+  516  vim README.md 
+  517  head -15 Puppetfile 
+  518  vim README.md 
+  519  git status
+  520  git add Puppetfile README.md 
+  521  git commit -m '6.1.0 plus rpms released in March 2018.  See README for details"
+  522  '
+  523  git status
+  524  ls -al
+  525  vim environment.conf 
+  526  git status
+  527  vim environment.conf 
+  528  checkout environment.conf 
+  529  git checkout environment.conf 
+  530  ls -al
+  531  cp Puppetfile /var/jmg/r10k
+  532  cp README.md /var/jmg/r10k
+  533  git checkout simp_6_2_0
+  534  git cp /var/jmg/r10k Puppetfile .
+  535  cp /var/jmg/r10k Puppetfile .
+  536  cp /var/jmg/r10k/Puppetfile Puppetfile 
+  537  cp /var/jmg/r10k/README.md README.md 
+  538  git status
+  539  git add Puppetfile  README.md 
+  540  git commit -m 'Changed Puppet file to include only simp-rpms. See README for details'
+  541  git status
+  542  git push origin simp_6_2_0
+  543  bc
+  544  vim Puppetfile 
+  545  git add Puppetfile 
+  546  git commit -m ' Fixed type in Puppetfile'
+  547  git push origin simp_6_2_0
+  548  bc
+  549  vim README.md 
+  550  git status
+  551  git add README.md 
+  552  git commit -m 'Updates to readme file for clamav errors.'
+  553  sudo sudosh
+  554  vim ~/.bashrc
+  555  usr/bin/ssh-add $HOME/.ssh/id_rsa
+  556  /usr/bin/ssh-add $HOME/.ssh/id_rsa
+  557  sudo sudosh
+  558  bc
+  559  vbox list vms
+  560  vboxdel jmg21-66-2
+  561  vbox-newmachine.sh 21 66 2
+  562  bc
+  563  vboxdel jmg21-66-2
+  564  vbox-newmachine.sh 21 66 2
+  565  bc
+  566  vboxdel jmg21-66-2
+  567  vbox-newmachine.sh 21 66 2
+  568  sudo sudosh
+  569  cd /var/jmg/vagrant/
+  570  cd SIMP61-CENTOS69-FIPS/
+  571  vim Vagrantfile 
+  572  vagrant up
+  573  vim ~/scripts/vbox-newmachine.sh 
+  574  vim Vagrantfile 
+  575  vim ~/scripts/vbox-newmachine.sh 
+  576  vim Vagrantfile 
+  577  vbox-newmachine.sh 21 66 2
+  578  vargrant ssh
+  579  vagrant ssh
+  580  ssh admin1@192.168.102.7
+  581  ssh-keygen -R 192.168.102.7
+  582  ssh admin1@192.168.102.7
+  583  vagrant ssh
+  584  ssh-keygen -R 192.168.102.7
+  585  ssh admin1@192.168.102.7
+  586  cd /var/jmg/vagrant/SIMP61-CENTOS69-FIPS/
+  587  vagrant ssh
+  588  ssh blade05
+  589  ssh blade05
+  590  sudo sudosh
+  591  su -
+  592  sudo sudosh
+  593  dmidecode | grep -i serial
+  594  exit
+  595  sudo sudosh
+  596  ssh ws157
+  597  ssh ws159
+  598  ping ws158
+  599  ping ws160
+  600  ssh ws160
+  601  ssh 10.0.71.226
+  602  ssh root@10.0.71.226
+  603  ssh 10.0.71.227
+  604  ssh root@10.0.71.227
+  605  sudo sudosh
+  606  exit
+  607  sudo sudosh
+  608  sudo sudosh
+  609  ssh speedy05
+  610  sudo sudosh
+  611  exit
+  612  sudo sudosh
+  613  ssh blade04
+  614  virsh list --all
+  615  sudo sudosh
+  616  ssh proxy
+  617  ls -la
+  618  ssh store02
+  619  sudo sudosh
+  620  exit
+  621  sudo sudosh
+  622  ssh tpm1
+  623  ssh tastypuppet
+  624  sudo sudosh
+  625  ssh store03
+  626  cd62
+  627  sl -al
+  628  ls -al
+  629  pwd
+  630  cd stunnel
+  631  ls -al
+  632  cd manifests/
+  633  ls -al
+  634  grep chown *
+  635  vim init.pp 
+  636  vim install.pp 
+  637  sudo sudosh
+  638  pwd
+  639  ls -al
+  640  sudo sudosh
+  641  ls -al
+  642  sudo sudosh
+  643  sudo sudosh
+  644  sudo sudosh
+  645  ssh -vvv blade05
+  646  sudo sudosh
+  647  ssh store01
+  648  sudo sudosh
+  649  ssh store03
+  650  sudo sudo
+  651  sudo sudosh
+  652  ssh tastypuppet
+  653  cd62
+  654  cd simp_elasticsearch/
+  655  ls -al
+  656  cd manifests/
+  657  ls -al
+  658  vim init.pp
+  659  cd ../
+  660  vim README.rst 
+  661  cd62
+  662  cd stunnel
+  663  cd manifests/
+  664  ls -al
+  665  vim connection.pp 
+  666  ls -al
+  667  vim connection.pp 
+  668  vim monolithic.pp 
+  669  vim config.pp 
+  670  sudo sudosh
+  671  cd /var/jmg/r10k/tastypuppet-control-repo
+  672  vim Puppetfile.orig 
+  673  ssh store01
+  674  sudo sudosh
+  675  ssh ws156
+  676  sudo sudosh
+  677  sudo sudosh
+  678  ssh store01
+  679  ssh ws160
+  680  man freshclam.conf
+  681  cd62
+  682  cd stunnel/
+  683  ls -al
+  684  cd manifests/
+  685  ls -al
+  686  vim init.pp 
+  687  grep -ri setuid
+  688  vim config.pp 
+  689  ls -al
+  690  cd instance
+  691  ls -al
+  692  vim reserve_port.pp 
+  693  cd ../
+  694  vim instance.pp 
+  695  sudo sudosh
+  696  ls -al
+  697  vim instance.pp 
+  698  ssh tastypuppet
+  699  ssh ws156
+  700  sudo sudosh
+  701  exit
+  702  cd62
+  703  cd stunnel
+  704  sudo sudosh
+  705  exit
+  706  cd62
+  707  cd stunnel
+  708  cd lib
+  709  ls -al
+  710  cd puppet/
+  711  ls -al
+  712  cd provider/
+  713  sl -al
+  714  ls -la
+  715  vim stunnel_instance_purge/
+  716  cd stunnel_instance_purge/
+  717  ls -al
+  718  vim purge.rb 
+  719  ls -al
+  720  cd ../
+  721  ls -al
+  722  cd ../
+  723  sl -al
+  724  ls -al
+  725  cd ../
+  726  l s-al
+  727  sl -al
+  728  ls -al
+  729  cd ../
+  730  ls -la
+  731  cd manifests/
+  732  sl -al
+  733  sl a-l
+  734  ls -la
+  735  vim account.pp 
+  736  sudo sudosh
+  737  sudo sudosh
+  738  exit
+  739  sudo sudosh
+  740  exit
+  741  sudo sudosh
+  742  sudo sudosh
+  743  sudo sudosh
+  744  ssh ws156
+  745  ssh tastypuppet
+  746  ssh ws156
+  747  ssh ws154
+  748  ssh tastypuppet
+  749  sudo sudosh
+  750  exit
+  751  ssh blade05
+  752  ssh admin1@192.168.101.7
+  753  sudo sudosh
+  754  ssh ws156
+  755  ssh admin1@192.168.101.21
+  756  ssh admin1@192.168.101.7
+  757  ssh ws156
+  758  ssh ws154
+  759  sudo sudosh
+  760  sudo sudosh
+  761  exit
+  762  sudo sudsoh
+  763  exit
+  764  sudo sudosh
+  765  exit
+  766  ssh tastypuppet
+  767  ssh gitlab
+  768  cd /var/jmg
+  769  mkdir SIMP-4568
+  770  cd SIMP-4568
+  771  gclone stunnel
+  772  cd pupmod-simp-stunnel/
+  773  git checkout -b SIMP-4568
+  774  sudo sudosh
+  775  ssh balde05
+  776  ssh blade05
+  777  ls -la
+  778  ssh store01
+  779  sudo sudosh
+  780  ssh tastypuppet
+  781  sudo sudosh
+  782  cd /var/jmg
+  783  ls -al
+  784  cd simp-core
+  785  ls -al
+  786  cd ..
+  787  ls -al
+  788  cd simp-core
+  789  cd ..
+  790  mv simp-core old
+  791  gclone simp-core
+  792  git status
+  793  cd simp-core
+  794  ls -al
+  795  vim Puppetfile.tracking 
+  796  cd spec/acceptance/
+  797  ls -al
+  798  cd suites/
+  799  ls -al
+  800  cd rpm_docker/
+  801  ls -al
+  802  cd nodesets/
+  803  ls -al
+  804  vim default.yml 
+  805  cd ../../../../
+  806  cd ../
+  807  bundle install
+  808  bundle exec rake exec beaker:suites[rpm_docker,default]
+  809  SIMP_BUILD_docs=no bundle exec rake beaker:suites[rpm_docker,default]
+  810  ssh admin1@192.168.101.7
+  811  ssh blade05
+  812  cd /net/ISO/Testing_isos/
+  813  ls -al
+  814  ssh speedy01
+  815  cd /var/jmg/SIMP-4568
+  816  ls -al
+  817  cd pupmod-simp-stunnel/
+  818  ls -al
+  819  git status
+  820  vim CHANGELOG 
+  821  cd templates/
+  822  ls -al
+  823  vim connection_init.erb 
+  824  cd ..
+  825  vim CHANGELOG 
+  826  git status
+  827  vim manifests/config.pp
+  828  pwd
+  829  git status
+  830  vim manifests/config.pp 
+  831  remote -v
+  832  git remote -v
+  833  pwd
+  834  git status
+  835  git checkout CHANGELOG
+  836  git remote add jeanne https://github.com/jeannegreulich/pupmod-simp-stunnel
+  837  git pull jeanne SIMP-4568
+  838  cd ../
+  839  mv pupmod-simp-stunnel/ xpupmod-simp-stunnel
+  840  git clone https://github.com/jeannegreulich/pupmod-simp-stunnel
+  841  cd pupmod-simp-stunnel/
+  842  ls -al
+  843  git status
+  844  git checkout SIMP-4568
+  845  git status
+  846  git branch -a
+  847  git fetch origin/SIMP-4568
+  848  git fetch remotes/origin/SIMP-4568
+  849  git fetch SIMP-4568
+  850  git fetch --help
+  851  git fetch --all
+  852  git status
+  853  git checkout SIMP-4568
+  854  git checkout SIMP-4586
+  855  ls -al
+  856  git status
+  857  vim manifests/config.pp 
+  858  vim CHANGELOG 
+  859  git status
+  860  git add CHANGELOG 
+  861  git commit --amend
+  862  ls -al
+  863  git status
+  864  git remote -v
+  865  git push origin SIMP-4586
+  866  git push -f origin SIMP-4586
+  867  cd62
+  868  ls -al
+  869  vim simp_elasticsearch/README.rst 
+  870  sudo sudosh
+  871  man bash
+  872  man test
+  873  cd /var/jmg/SIMP-4586
+  874  cd /var/jmg
+  875  ls -al
+  876  cd SIMP-4568
+  877  ls -al
+  878  cd pupmod-simp-stunnel/
+  879  cd spec
+  880  ls -al
+  881  cd classes/
+  882  ls -al
+  883  vim config_spec.rb 
+  884  vim init_spec.rb 
+  885  cd ../../
+  886  bundle install
+  887  bundle exec rake test
+  888  vim spec/classes/config_spec.rb 
+  889  grep -ri service
+  890  grep -ri service | grep manifest
+  891  ls -la
+  892  grep -ri service | grep manifest
+  893  grep -ri service | grep manifest | grep contain
+  894  grep -ri stunnel::service | grep manifest
+  895  ls -al
+  896  cd manifests/
+  897  ls -al
+  898  vim instance.pp 
+  899  cd ../
+  900  bundle exec rspec spec/classes/config_spec.rb 
+  901  vim spec/classes/config_spec.rb 
+  902  bundle exec rspec spec/classes/config_spec.rb 
+  903  vim spec/classes/config_spec.rb 
+  904  bundle exec rspec spec/classes/config_spec.rb 
+  905  cd spec
+  906  cd ..
+  907  vim spec/classes/config_spec.rb 
+  908  bundle exec rspec spec/classes/config_spec.rb 
+  909  vim spec/classes/config_spec.rb 
+  910  bundle exec rspec spec/classes/config_spec.rb 
+  911  vim spec/classes/config_spec.rb 
+  912  bundle exec rspec spec/classes/config_spec.rb 
+  913  vim spec/classes/config_spec.rb 
+  914  bundle exec rake test
+  915  bundle exec beaker:suites
+  916  bundle exec rake beaker:suites
+  917  BEAKER_destroy=onpass bundle exec rake beaker:suites
+  918  cd .vagrant
+  919  cd beaker_vagrant_files/default.yml/
+  920  vagrant ssh
+  921  vagrant ssh el7
+  922  vagrant ssh server-el7
+  923  cd ../../../
+  924  ls -al
+  925  cd manifests/
+  926  ls -al
+  927  vim config.pp 
+  928  cd ../../
+  929  cd pupmod-simp-stunnel/
+  930  BEAKER_destroy=onpass bundle exec rake beaker:suites
+  931  vim manifests/instance.pp 
+  932  vim manifests/config.pp 
+  933  more README.md 
+  934   vim spec/acceptance/suites/default/00_instances_spec.rb 
+  935  BEAKER_destroy=onpass bundle exec rake beaker:suites
+  936  vim manifests/config.pp 
+  937  BEAKER_destroy=onpass bundle exec rake beaker:suites
+  938  vim ./spec/acceptance/suites/default/01_connection_spec.rb +54
+  939  cd .vagrant/beaker_vagrant_files/default.yml/
+  940  vagrant ssh server-el7
+  941  cd ../../../
+  942  ls -al
+  943  vim ./spec/acceptance/suites/default/01_connection_spec.rb +54
+  944  cd .vagrant/beaker_vagrant_files/default.yml/
+  945  vagrant ssh server-el7
+  946  cd ../../../
+  947  vim ./spec/acceptance/suites/default/01_connection_spec.rb +54
+  948  BEAKER_destroy=onpass bundle exec rake beaker:suites
+  949  vim /spec/acceptance/suites/default/01_connection_spec.rb +70
+  950  vim spec/acceptance/suites/default/01_connection_spec.rb +70
+  951  BEAKER_destroy=onpass bundle exec rake beaker:suites
+  952  git status
+  953  git add manifests/config.pp spec/acceptance/suites/default/01_connection_spec.rb spec/classes/config_spec.rb
+  954  git commit -m 'Updated tests and added check for directory'
+  955  git status
+  956  git remote -v
+  957  git push origin SIMP-4586
+  958  bundle exec rake test
+  959  ssh tastypuppet
+  960  sudo sudosh
+  961  exit
+  962  sudo sudosh
+  963  sudo sudosh
+  964  ssh blade05
+  965  sudo sudosh
+  966  exit
+  967  sudo sudosh
+  968  old
+  969  sudo sudosh
+  970  curl -k -XGET 'https://es2.tasty.bacon:9200/_cat/health?v&pretty'
+  971  curl -k -XGET 'https://es2.tasty.bacon:9200/_cat/nodes?v&pretty'
+  972  curl -k -XGET 'https://es1.tasty.bacon:9200/_cat/nodes?v&pretty'
+  973  nslookup 10.0.71.103
+  974  curl -k -XGET 'https://es1.tasty.bacon:9200/_cat/indices?v&pretty'
+  975  curl -k -XGET 'https://es2.tasty.bacon:9200/_cat/indices?v&pretty'
+  976  curl -k -XPUT 'https://es2.tasty.bacon:9200/testjmg?pretty&pretty'; curl -k -XGET 'https://es2.tasty.bacon:9200/_cat/indices?v&pretty'
+  977  curl -k --get  https://es2.tasty.bacon:9200
+  978  curl -k --get  https://es1.tasty.bacon:9200
+  979  curl -k -XPUT 'https://es1.tasty.bacon:9200/testjmg/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'{"name": "John Doe"}'
+  980  curl -k --XGET  'https://es1.tasty.bacon:9200/testjmg/external/1?pretty&pretty'
+  981  curl -k -XGET  'https://es1.tasty.bacon:9200/testjmg/external/1?pretty&pretty'
+  982  curl -k -XPUT 'https://es1.tasty.bacon:9200/testjmg2/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'{"name": "Jane Doe"}'
+  983  curl -k -XGET 'https://es2.tasty.bacon:9200/_cat/indices?v&pretty'
+  984  curl -k -XGET 'https://es1.tasty.bacon:9200/_cat/indices?v&pretty'
+  985  curl -k -XGET 'https://es1.tasty.bacon:9200/_cat/nodes?v&pretty'
+  986  curl -k -XGET 'https://es2.tasty.bacon:9200/_cat/nodes?v&pretty'
+  987  curl -k -XPUT 'https://es1.tasty.bacon:9200/testjmg3/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'{"name": "Daffy Doe", "address": "unknown"}'
+  988  curl -k -XGET 'https://es1.tasty.bacon:9200/_cat/indices?v&pretty'
+  989  curl -k -XGET 'https://es2.tasty.bacon:9200/_cat/indices?v&pretty'
+  990  curl -k -XDELETE 'https://es1.tasty.bacon:9200/testjmg2?pretty&pretty'
+  991  curl -k -XDELETE 'https://es2.tasty.bacon:9200/testjmg2?pretty&pretty'
+  992  curl -k -XPUT 'https://es1.tasty.bacon:9200/testjmg3/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'{"name": "Daffy Doe", "address": "Heaven"}'
+  993  curl -k -XGET 'https://es1.tasty.bacon:9200/_cat/indices?v&pretty'
+  994  curl -k -XPUT 'https://es1.tasty.bacon:9200/testjmg3/external/2?pretty&pretty' -H 'Content-Type: application/json' -d'{"name": "Daffy Duck", "address": "The Pond"}'
+  995  curl -k -XGET 'https://es1.tasty.bacon:9200/_cat/indices?v&pretty'
+  996  cd
+  997  curl -k -H "Content-Type: application/json" -XPOST "https://es1.tasty.bacon:9200/bank/account/_bulk?pretty&refresh" --data-binary "@accounts.json"
+  998  curl -k -XGET 'https://es1.tasty.bacon:9200/_cat/indices?v&pretty'
+  999  curl -k  -XGET 'https://es1.tasty.bacon:9200/bank/_search?q=*&sort=account_number:asc&pretty&pretty'
+ 1000  curl -k  -XGET 'https://es1.tasty.bacon:9200/_cluster/settings?pretty'
+ 1001  history
+ 1002  history > ~/notes-elasticsearch.txt

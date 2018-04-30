@@ -1,0 +1,19 @@
+When the boot menu comes up, hit e to select the option.
+
+in the linux16 (linux or linuxefi depending on system) line replace
+
+ro   with rw init=/sysroot/bin/sh
+rd.shell=0 with rd.shell=1
+
+Then hit control-x and you will boot into single user mode.
+
+
+To get more info on boot you can remove "rhgb  quiet" entirely or just the quiet.  Gives
+different amount of info.  I am not sure the difference.
+
+or add rd.debug
+
+
+Here is a good page to decscribe the options.
+
+http://man7.org/linux/man-pages/man7/dracut.cmdline.7.html

@@ -1,0 +1,86 @@
+The purpose of this page is to keep centralized information on the status and resources for TPM 2.0 so we don't have to go searching through zillions of tickets to find out where we are.
+
+Helpful resources:
+
+Very high level over view:
+https://www.trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-A-Brief-Introduction.pdf
+
+Practical Guide For TPM 2.0 (describes how it works in general, not specifically for linux platforms.)
+
+https://link.springer.com/content/pdf/10.1007%2F978-1-4302-6584-9.pdf
+
+
+Notes:
+
+Have not found anything for setting up TPM 2.0 on linux but these are the resources needed:
+tpm2-tss-1.0-5.el7.x86_64  - provides the software stack supporting the TPM.  More
+  information located at
+  https://centos.pkgs.org/7/epel-x86_64/tpm2-tss-1.0-2.el7.x86_64.rpm.html
+
+tpm2-tools-1.1.0-7.el7.x86_64 - described as a batch of testing tools but these are the
+  commands used in TPM 1.2 to set up the TPM.
+
+shim-x64-12-1.el7.centos.x86_64 - the images and executables needed for secure boot on
+  el7.  (Stuff for /boot/efi and tftpboot server.)
+
+tpm2-tss-utils-1.0-5.el7.x86_64 - contains test to verify your TPM is working and
+  installed correctly
+
+
+These are all included in CentOS 7.4 but not any ealier releases of CentOS 7.  Have not checked out CentOS 6.
+
+----------------------------------------------------------------------------
+
+install
+   - tpm2-tools.x86_64
+   - tpm2-tss.x86_64
+
+Migth need - tpm2-tss-utils.x86_64
+
+There is also tpm2-tss-devel.x86_64 but don't think we will need that.
+
+to see if the tpm is installed
+
+   - lsmod | grep -i tpm_crb  (should see something lke tpm_crb 13058 0)
+
+        or
+   - dmesg | grep -i tpm  (Should see:
+[ 0.000000] ACPI: SSDT 000000007bab3000 003A7 (v02 DELL Tpm2Tabl 00001000 INTL 20121114)
+[ 0.000000] ACPI: TPM2 000000007b954000 00038 (v04 DELL EDK2 00000002 01000013)
+[ 19.405889] tpm_tis MSFT0101:00: 2.0 TPM (device-id 0xFE, rev-id 2)
+
+ )
+
+Updated the kickstart files to use gpt partitions
+  - updated tftpboot.pp
+  - created a new pupclient...etc file (not sure if I needed this.)
+
+to see how your partitions are configured parted -l
+
+install
+  - tpm2-tss-utils-1.0-5.el7.x86_64
+
+run tpmclient to make sure tests pass
+NOTE: I am getting a failure but when I rum tpm_rc_decode it says the error is that TPM1.2 is not supported.  
+
+Enable the resource manager (It looks like this goes away in later versions and is replaced by tpm2_abrmt but not in tpm2_tss 1.0.5 which is delivered with CentOS 7)
+
+
+[root@speedy05 ~]# systemctl start resourcemgr
+[root@speedy05 ~]# systemctl enable resourcemgr
+
+
+
+tpm2_takeownership -o P@ssw0rdP@ssw0rdowner -e P@ssw0rdP@ssw0rdendorse -l P@ssw0rdP@ssw0rdlock
+
+......Change Hierarchy Owner Auth Succ......
+
+......Change Hierarchy Endorsement Auth Succ......
+
+......Change Hierarchy Lockout Auth Succ......
+
+
+
+Intel Trusted Execution Technoligy (TXT) and launch control policy.
+
+

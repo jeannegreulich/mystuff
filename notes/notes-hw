@@ -1,0 +1,15 @@
+lscpu
+lshw -short
+hwinfo
+lspci
+lsscsi
+lsusb
+inxi Inxi is a 10K line mega bash script that fetches hardware details from multiple different sources and commands on the system, and generates a beautiful looking report that non technical users can read easily.
+lsblk
+df
+pydf
+fdisk
+mount
+free
+dmidecode
+/proc 

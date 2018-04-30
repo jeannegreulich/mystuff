@@ -1,0 +1,41 @@
+-installed new puppet server
+ pointing to its own ldap,dns
+-copied over dns info and added my server to old dns.
+-tested moving dns to new one on a few to see if I knew what I wa doing.
+-dumped ldap and restored.
+  -shutdown slap on old server
+  -slapcat -f /path/to/the/slapd.conf -l backup.ldif
+  - change hiera variable for password on new
+  - shutdown new
+  - slapadd -v -c -l backup.ldif -f /path/to/the/slapd.conf
+  -restart slapd
+  - Note it didn't work and I manually reset the password using slappasswd
+    and ldapmodify.  But I think it might just have been that I forgot to
+    restart sssd also. 
+-setup dhcp and kickstart on the new server
+  -copied over the files from /var/simp/rsync/dhcpd on old machine
+   to /var/simp/environments/simp/rsync/CentOS/Global/dhcpd
+  -updated /var/www/ks docs from what was on the old server.
+     - we had special kisk start files for some servers with arrays
+
+-turned off DHCP on the old server (my new and old server are on the same
+  LAN.)
+-test kickstarted new machines.
+-updated manifest/site.pp to include our host groups.
+-  copy certs  
+   /etc/puppet/environments/simp/modules/pki/files/keydist
+     to
+   /var/simp/environments/simp/site_files/pki_files/files/keydist
+  (I regenerated ours and will use new certs )
+
+
+-on puppet server update auth.conf to accept old v 3.8 requests.
+  https://docs.puppet.com/puppet/4.9/upgrade_major_server.html#plan-your-upgrade
+
+
+
+-upgrading system
+  -update repo
+  -yum upgrade
+  -remove old puppet certs
+  -run puppet 

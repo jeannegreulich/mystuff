@@ -1,0 +1,6 @@
+(download the tar files, not the git lab files. )
+compile tss first, the others need its libraries.
+
+
+yum install glib2-devel.x86_64
+yum install dbus-devel.x86_64

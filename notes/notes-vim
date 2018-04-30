@@ -1,0 +1,9 @@
+To bring up two files in split form:
+
+vim -o filename1  filename2
+
+Once you are in use ctl-w and the arrow keys to move back and forth.
+
+Use ctl-w  shift L  to make the windows next to each other from side-by-side.
+
+The help command for working  in windows while you are in windows is :help windows.

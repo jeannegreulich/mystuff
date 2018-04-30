@@ -1,0 +1,47 @@
+Notes on setting up a CentOS Kickstart on a CentOS 7 machine
+
+1) Set up yum repository
+   copy up Centos6.9 DVD1 and 2 and unpack
+   /usr/local/bin/unpack_dvd <path to your dvd>
+
+2) Set up a kick start server.
+   You can either set up a separate kickstart server or add these files Copy the kickstart files from the CentOS 6 DVD under ks to a ks/CentOS6 directory under
+   /var/www/ks  (make sure all files are owned by root:apache and have 640 perms)
+
+
+3) Set up tftp files
+  
+   cp images/pxepboot/* files to /tftpboot/linux-install/centos-6-x86_64
+
+   update your tftpboot.pp file to include the additional boot model:
+
+
+ class site::tftpboot {
+  include '::tftpboot'
+
+  case $facts['os']['release']['major'] {
+  '7': { tftpboot::linux_model { 'el7_x86_64':
+        kernel => 'centos-7-x86_64/vmlinuz',
+        initrd => 'centos-7-x86_64/initrd.img',
+        ks     => "https://${facts['ipaddress']}/ks/pupclient_x86_64.cfg",
+        extra  => "inst.noverifyssl ksdevice=bootif\nipappend 2"
+      }
+    }
+  '6': { tftpboot::linux_model { 'el6_x86_64':
+        kernel => 'centos-6-x86_64/vmlinuz',
+        initrd => 'centos-6-x86_64/initrd.img',
+        ks     => "https://${facts['ipaddress']}/ks/CentOS6/pupclient_x86_64.cfg",
+        extra  => "noverifyssl ksdevice=bootif\nipappend 2"
+      }
+    }
+  default: {
+     warn("${facts['os']['release']['major']} not supported for tftpboot")
+    }
+  }
+
+
+  tftpboot::assign_host { 'default': model => "el7_x86_64" }
+  tftpboot::assign_host { '01-BC-BC-BC-BC-BC-BC': model => "el6_x86_64" }
+}
+
+

@@ -1,0 +1,29 @@
+
+Yum install the version from centos extras repo.
+
+The docker-ce install was not setting up the nat controls.
+
+use the docker.pp manifest to ensure iptables are set up correctly.
+
+iptables -L -n -t nat  (you should see the DOCKER entry)
+
+For some reason when I used the docker-ce, iptables told me that DOCKER file did not exist.  I don't have this problem with the docker (version 1.12.6) from the etras repo.
+
+---------------------------
+if you can't connect as a user then make sure that /etc/docker/daemon.json contains
+
+{
+    "live-restore": true,
+    "group": "dockerroot"
+}
+
+(when group is the group you want to put people in who should be able to connect to docker.  This will change the permissiosns on the docker daemon socket so anyone in the group can connect.)
+--------------
+To increase the default size of the disk used:
+
+With Centos 7 I did the following to increase the default size of the containers
+
+Modify the docker config in /etc/sysconfig/docker-storage to add the line:
+DOCKER_STORAGE_OPTIONS= - -storage-opt dm.basesize=20G
+service docker stop
+rm /var/lib/docker NOTE THIS DELETES ALL IMAGES etc. SO MAKE A BACKUP

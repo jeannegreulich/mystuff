@@ -1,0 +1,30 @@
+Server94 -  A ruby namespace problem.  When puppet evaluates the catalog on the server it does something I don't
+totally understand and the environments don't always keep the the namespaces of the functions seperate.  So it will load the function
+from the firt environment it found, which could be the wrong function.  See environment isolation to try to understand this.
+------------------------------------------------------------------------------
+
+How to determine what puppet modules/classes are installed on a puppet server:
+  /var/lib/puppet/classes.txt  (This is a list classes instaled by puppet on this server.)
+
+-----------------------------------------------
+sudo puppet agent --evaltrace -td
+
+--evaltrace will give you a breakdown of the time spent for each step on the Puppet run.
+
+----------------------------------------------------
+grep -rl --exclude-dir='.git'  <search term>
+
+-----------------------------------------------------
+
+include <module> name will load that module into that clients catalog on the puppet server.  When the catalog is run the init.pp of that module will be run.
+--------------------------------------------------
+
+Building from the ISO will call the ks/dvd/<something> auto.cfg file to copy over files to the puppet server.  Look in the postinstall section of the auto.cfg file.
+
+The is a min.cfg file in the same directory which could be used to install a smalled amount of rpms.  This is not used at this time.
+
+-----------------------------------------------------------------------------
+
+to parse a YAML file:
+
+ruby -e "require 'yaml'; YAML.load_file('./simp_def.yaml')"

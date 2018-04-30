@@ -1,0 +1,42 @@
+https://wiki.gentoo.org/wiki/Integrity_Measurement_Architecture
+
+
+add kernel parameters ima_appraise_tcb and ima_appraise=fix
+
+had to download the ima-evm-utils package
+https://www.rpmfind.net/linux/epel/7/x86_64/Packages/i/ima-evm-utils-1.0-2.el7.x86_64.rpm
+it doesn't seem to be in the extras/base/updates repos.
+install this package.
+
+yum install attr package to view the ima attributes on a file.
+
+run
+find / \( -fstype rootfs -o -fstype ext4 \) -type f -uid 0 -exec evmctl ima_hash '{}' > /dev/null \;
+
+to add the ima attributes to the files.
+
+to see if they are there do:
+
+getfattr -m . -d <filename>
+
+------
+now change the kernel parameter ima_appraise=fix to ima_appraise=enforce and
+reboot.
+
+-----------
+I did that and it rebooted but I could only log in as root at the console and I could not
+read the log files.
+
+--------
+I tried to update the ima policy in /sys/kernel/security/ima/policy using the
+tpm module but I get an error that it can not write to that file.
+
+Two feature tickets have been entered to REDHAT NSA
+1) Clear the memory cache.  Once You enter a file measurement into the cache it stays,
+   even if your policy says don't measure it and even if the file is not there anylonger.
+   This can hog memory.  If you reboot it reloads this whole file.
+2) Allow a reload of the policy without rebooting and log it to the audit log. The securityfs
+   file system only allows you to write to it at boot time.  This means if you change and update the policy
+   you need to reboot.  UNIX people don't like to reboot.  This can be a considerable problem on clustered systems
+   with lots of nodes.
+

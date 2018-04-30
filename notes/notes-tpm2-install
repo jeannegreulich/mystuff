@@ -1,0 +1,21 @@
+install packages:
+
+checkout from git the modules versions:
+tpm2-tss 1.2.0
+tpm2-abrmd 1.1.1
+tpm2-tools 2.1.0
+
+When running configure make sure PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib
+PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig configure --with-dbuspolicydir=/etc/dbus-1/system.d --with-udevrulesdir=/etc/udev/rules.d/
+
+Add /usr/local/lib to library path:
+vim /etc/ld.so.conf.d/tpm2-abrmd.conf and add /usr/local/lib
+then run
+To reload the stuff:
+
+ldconfig -v
+udevadm trigger
+pkill -HUP dbus-daemon
+
+
+

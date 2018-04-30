@@ -1,0 +1,12 @@
+linux:   RedHat/CentOS 7
+puppet:  download and run the puppet tutorial
+ruby:     simple 15 minute tutorial: http://tryruby.org/levels/1/challenges/0
+VirtualBox/Vagrant/Beaker: https://www.vagrantup.com/docs/getting-started/
+git/github:
+readthedocs.org/restructured text
+JIRA/Gerrit:  Talk with Nick markoswi/Judy Johnson about how we use it.
+      -sprints
+      -assigning tickets
+      -submitting your changes
+      -the wiki https://simp-project.atlassian.net/wiki/display/SD/SIMP+Development+Home
+

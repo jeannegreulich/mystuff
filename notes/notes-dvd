@@ -1,0 +1,41 @@
+Building the ISO:
+
+1) Build the ISO in a local directory not your home directory.  The home dir is remote mounted and adds additional time copying large amounts of files over the network
+
+2)you can build two at once just do it in different directories.
+
+3)
+  - create the directory you are building in.
+  - cd to that directory and clone simp-core
+  -cd simp-core
+  - copy over the OS cd from /srv/net/ISO  into
+    the simp-core directory.
+  - run the rake:   rake build:auto[<iso dir>,<version>]  5.1.X or 5.1.0-2   or 4.2.3 or 4.2.X  , 6.X are available now
+
+4) If you are in simp-core and run rake -D build:auto  it will list out all the parameters and environment
+   vairiables you can set to modify the build.
+       SIMP_BUILD_bundle=no
+
+
+When it can't find the source rpms, remove simp-rake-helpers gem and reinstall, you probably have an old version and someone
+didn't update the version.
+
+Also remove /var/cache  it seems to be have downloaded a bad repomd.xml and for some reason yum clean all does not work. When it tries to install the
+mock environment it is failing.
+  (To find this I ran this command in simp-adapter directory
+    SIMP_BUILD_version=6.0.1-RC1.el7.centos rake pkg:rpm[/var/jmg/6.0.1-7/simp-core/build/distributions/CentOS/7/x86_64/mock.cfg,true,false]
+  and them saw that this command:
+    /usr/bin/yum --installroot /var/lib/mock/simp-centos-7-x86_64-simp-adapter__jgreulich/root/ --releasever 7 install @buildsys-build --setopt=tsflags=nocontexts
+  was failing)
+
+------
+Error can't find template means the link to template in rake helpers simp6. is wrong
+
+-----
+Error creating gpg key:
+Not so fun fact about building an ISO:  As part of building a dev ISO, we generate a GPG key for it.  If the --homedir parameter passed to gpg-agent is too long, the agent won't start and emits the following error message (which is of course suppressed by simp-rake-helpers):
+   gpg-agent[19447]: name of socket too long
+The following path was a few characters too long:
+/var/opt/enemsick/lrep/simp-core-SIMP-3458-el7/build/distributions/CentOS/7/x86_64/build_keys/dev
+
+

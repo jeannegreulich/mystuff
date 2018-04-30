@@ -1,0 +1,19 @@
+compile tss first.
+
+set environement vaiables:
+
+export SAPI_CFLAGS='-I/usr/local/include/sapi'
+export SAPI_LIBS='-L/usr/local/lib -lsapi'
+export TCTI_DEVICE_CFLAGS='-I/usr/local/include/tcti'
+export TCTI_DEVICE_LIBS='-L/usr/local/lib -ltcti-device'
+
+export TCTI_SOCKET_CFLAGS='-I/usr/local/include/tcti'
+export TCTI_SOCKET_LIBS='-L/usr/local/lib -ltcti-socket'
+export TCTI_TABRMD_CFLAGS='-I/usr/local/include/tcti'
+export TCTI_TABRMD='yes'
+export with_tcti_tabrmd='yes'
+export TCTI_TABRMD_LIBS='-L/usr/local/lib -ltcti-tabrmd'
+
+cp /usr/loca/etc/dbus-1/system.d/tpm* to /etc/dbus-1/system.d and reboot
+systemctl enable tpm2-abrmd
+

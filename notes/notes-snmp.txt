@@ -1,0 +1,56 @@
+
+
+Create profile module for configuring snmpd
+1) Installation:
+ -install snmpd deamon
+    set defaults for user auth mode:
+       -usm (make this OS spec since Centos 7 will in future be able to use TLS/DTLS
+       -priv
+ -ask if to install utils (client) 
+    default no although we will need it for testing
+    since we are not setting up trap.
+ -configure defaultscreate directories
+ -determine what packages are to be installed: snmpd, utils, trap
+ - configure system setting in snmpd.local.conf
+ -system name,location,contact that stuff that is local to the machine
+ -disable v1 and v2
+ - audit and selinux? Does SNMP have its own selinux context? Haven't figured that one out yet.
+ -  Logging - it looks like where it is logged it set up via parameters to
+    snmpd.  Some defaults are set in snmpd.conf
+ - create types for:
+    security model (usm, tls,...)
+    security level (noauth, auth. priv)
+    oid
+2)configure iptables & tcp wrappers
+  - set the agent addresses and iptables accordingly.
+  - snmp module defaults to local only -
+     - use array to add interfaces and set up IP Tables
+   (pass this to snmp before install or create a file in simp dir?)
+3) access: For now use USM (tls/stls will be looked at later. Note net-snmp version 5.5 on Centos 6.9 does not even handle TLS/SSH etc.)
+v3: 
+   create/configure users
+   create an access.conf file in simp directory that contains
+     views/access/groups.
+   check for fips and son't allow MD5, DES if enabled.
+   create 2 users
+      -read only with access to system by default or shoudl it be a read everything
+       user?  (look at simp snmpd module for defaults)
+      -read write with access to system and read to everything
+      - system OIDS seem to be defined
+           - .1.3.6.1.2.1.1 (System -
+           - .1.3.6.1.2.1.25 (Host -stuff like what is installed, etc)
+
+4)Create a monitoring.conf in simp directory tosetup defaults for monitoring
+   (look at pupmod-simp-snmpd to see what was done in that module)
+5)configure rsync to sync mib dirs
+6)configure rsync to sync dlmod dirs
+    may need to do this before calling snmp but check it out.
+    see if creating dlmod.conf in simp directory will work. 
+    (I have nto found modules to test with)
+
+98) Document the usage in the README and the Read the docs
+
+99) Unit tests
+
+100) Acceptance tests
+

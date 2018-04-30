@@ -1,0 +1,24 @@
+Adding and removing a network card:
+
+List the network interfaces for your domain:
+virsh domiflist simpjmg02
+
+Detach an existing network card (use the list to fill out the values)
+virsh detach-interface --domain simpjmg02 --type bridge --mac aa:bb:bb:bb:00:02 --config
+
+Add an interface (bridge)
+virsh attach-interface --domain simpjmg02 --type bridge --mac aa:bb:bb:bb:00:02 --source virbr0 --config
+
+SNAPSHOTS:
+
+virsh snapshot-list --domain <domain name>
+
+virsh snapshot-create-as <domain-name>  <somename> <description> --quiesce
+  (note --quiesce needs the virsh tools installed on the system.)
+
+virsh snapshot-revert <domain-name> <snapshot name>
+
+virsh snapshot-delete <domain-name> <snapshot name>
+
+
+

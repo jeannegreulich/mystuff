@@ -1,0 +1,20 @@
+To make a policy from *.fc and *.te files:
+
+1016  make -f /usr/share/selinux/devel/Makefile
+ 1017  install -p -m 644 -D simp-rsync.pp /usr/share/selinux/packages/simp-rsync.pp
+ 1018  /usr/sbin/semodule -n -i /usr/share/selinux/packages/simp-rsync.pp
+ 1019  load_policy
+
+(load_policy is not needed if you drop the -n option from semodule.)
+
+
+To see what policies are loaded:
+
+semodule -l
+
+to create selinux modules from autdit denies use
+
+audit2allow
+
+
+Some links:

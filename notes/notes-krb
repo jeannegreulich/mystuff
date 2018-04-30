@@ -1,0 +1,9 @@
+1)first you need to krb5::client to the node to configure the client.
+
+
+2) Error on the client that mount ooption are wrong:
+
+This error means you need to load the  krb5 module
+
+modprobe rpcsec_gss_krb5
+

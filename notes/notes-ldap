@@ -1,0 +1,18 @@
+How to check what the connection to the LDAP server requires:
+
+   openssl s_client -connect puppet52.forever.me:636
+
+
+quick query whole database:
+
+ldapsearch -LLL -D cn=LDAPAdmin,ou=People,dc=your,dc=domain -H ldaps://<your ldapserver fqdn> -W "*"
+
+How to remove the sssd cache for ldap
+   sss_cache -E 
+
+this tells it to quit using the cache but keeps the cache around for failures.
+If you want to actually remove the cache remove the file /var/lib/sss/db/cache_LDAP.ldb
+
+setup debug in the slapd.conf file:
+
+loglevel stats sync acl config

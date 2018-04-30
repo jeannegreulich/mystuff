@@ -1,0 +1,5 @@
+The shared directories are mounted on /srv/net/ISOs
+
+Browsing is not enabled so you won't see it until you 
+
+cd /srv/net/ISO

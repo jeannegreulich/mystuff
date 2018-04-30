@@ -1,0 +1,64 @@
+pupmod-vsftpd-5.0.2-0 >=pupmod-stunnel 4.2.0.0
+pupmod-rsync-4.2.1-0 >= pupmod-stunnel 4.2.0.0
+pupmod-sim-1.2.2--0 >=pupmod-pupmod 6.0.0.-3
+pupmod-nfs-4.4.3-0 >=pupmod-stunnel >= 4.2.0.0
+pupmod-ssh-4.1.5-0 pupmod-haveged 0.3.0-0
+pupmod-simp   requires stunnelpupmod-simp-pogstash-1.0.0.-6 pupmod-simp-1.2.2-0 requires pupmod-svckill
+libselinux-ruby-2.0.94.7 requires libselinux 2.0.94-7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 4.2.0.0

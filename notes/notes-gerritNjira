@@ -1,0 +1,103 @@
+Once you have pushed you changes to your github repository with the correct Git Commit message, create a pull request from git hub to gerrit.
+-  Make sure you  use the correct branch in the simp repository.  (It defaults to master but master is not always the main branch in SIMP)
+
+When the pull request is comlete go to gerrit  GitHUB -> repositries  replication ->
+
+select simp in the repositories drop down (because it that is where you sent your changes.)
+- it takes it a while but a list of changes should pop up.
+-when you see the list select the check box next to your  change
+- the select the big green box at the top that says Next.
+
+
+
+How to determine what puppet modules/classes are installed on a puppet server:
+  /var/lib/puppet/classes.txt  (This is a list classes instaled by puppet on this server.)
+
+-----------------------------------------------
+grep -rl --exclude-dir='.git'  <search term>  
+
+-----------------------------------------------------
+
+Update a repository already pushed to Gerrit once:
+
+pull from your github repo.
+edit as needed.
+add your ssh repo as remote
+  git remote add <name> <ssh access from github>
+  git remote add jeanne git@github.com:jeannegreulich/pupmod-simp-ssh.git
+git commit --amend
+  add to the botom of yor commit message a line from gerrit with change id:
+  Change-Id I029e11ba01a1e9d0f15052bffa84d7ea1ef00fcb
+      and make sure you leave one blank line between that and the comments.
+      You can get the change id by logging into gerrit, select "my", select changes and then
+       find the change you submitted earlier.  Click on it and it opens a page with
+      a lot of information and on the left hand side about midway down is the change id.
+ now save the commit
+git push --force <where> <what>
+  where will be your remote ssh repo you added earlier
+  what is the branch you are working on
+  Yep you need force or it gives you an error that you are out of sync.
+Now when you go to github yo should see your changes.  Now go back to Gerrit and pull the updates
+   Log into gerrit, select "Github", select Pull requests, find your pull request
+   and select next until it  has updated.
+
+   37  git branch -av
+   38  git remote -v
+   39  git checkout simp-5.1.X
+ 1016  rake syntax
+ 1017  vim /srv/jmg/simp-core/src/puppet/modules/ssh/manifests/server/params.pp 
+ 1018  pwd
+ 1019  git remote -v
+ 1020  ssh-keygen -y
+ 1021  pwd
+ 1022  git remote add origin git@github.com:jeannegreulich/pupmod-simp-ssh.git
+ 1023  git remote -v
+ 1024  git status
+ 1025  git add params.pp
+ 1026  git status
+ 1027  git commit
+ 1028  git log
+ 1029  ls -la
+ 1030  vi params.pp
+ 1031  git status
+ 1032  git add params.pp
+ 1033  git commit --amend
+ 1035  git push origin SIMP-560
+ 1036  history >> ~/notes
+
+
+ ----------------------------------------------------------------------------
+ How to pull changes from gerrit:
+
+ 1)  In git set up remotes to point to gerrit.  You can do this by adding the following line to the alias section of your git config and running the alais:
+ [alias]
+   rag = "!f() { origin_url=`git config --get remote.origin.url`; if [ -z \"${origin_url}\" ]; then url=`git config --get remote.upstream.url`; else url=$origin_url; fi; reponame=`basename $url`; git remote rm gerrit 2>/dev/null || true; git remote add gerrit \"ssh://jeannegreulich@review.gerrithub.io:29418/simp/${reponame}\" 2>/dev/null; }; f"
+
+-clone the git repository you want:
+
+git clone http://github.com/simp/pupmod-foreman
+cd pupmod-forman
+git rag    (This is running the alias to create your remote.)
+
+2) Now use git review to see if any changes exist:
+
+git review -l
+
+3) If there are any changes it will list them with the number of the change in the far left.  Use that number to download the changes:
+
+git review  -d <the number>
+
+Now the changes have been pulled from gerrit to your clone.  
+
+
+-------------------------------------------------------------------------------------------------------------
+
+
+Query for JIRA:
+
+project = SIMP AND status changed to Closed after -7d  AND resolution = Done
+
+(Select the issues icon from left and then search issues.)  
+(Issues is an icon on the left that looks like a check box)
+
+

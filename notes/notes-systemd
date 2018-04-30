@@ -1,0 +1,32 @@
+When systemctl list-unit-files times out it is a known problem (actually with dbus)
+
+see: https://github.com/systemd/systemd/issues/1961
+
+It appears sesions are being abandoned.
+
+To fix you can try:
+
+systemctl restart dbus-org.freedesktop.login1.service
+systemctl restart systemd-logind.service
+systemctl daemon-reload
+
+It should clear out the files in /run/systemd/system.   (There will be a ton of 
+session-*-scope files in there from abandoned sessions.
+
+if that doesn't work try:
+
+
+systemctl | grep "abandoned" | grep -e "-[[:digit:]]" | sed "s/\.scope.*/.scope/" | xargs systemctl stop
+
+
+If you are desperate remove the session files from /run/systemd/system as directed in the github link above
+
+or I guess reboot.
+
+Also:  The bug files is :
+https://bugs.freedesktop.org/show_bug.cgi?id=95263
+
+---------------
+The dbus issues makes it so that you must reboot your system after  updating systemd:
+   https://www.centos.org/forums/viewtopic.php?t=65472
+https://bugs.centos.org/view.php?id=14278

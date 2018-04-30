@@ -1,0 +1,17 @@
+The  README file for the  simp/rubygems-simp-beaker-helpers in github has some documentation on variables you can set to speed things up.  https://github.com/simp/rubygem-simp-beaker-helpers
+
+You should also read the Beaker Help on the Beaker site.
+
+------
+
+To run an acceptance test:
+Download your module and use the .fixtures.yml to point to everything else.  
+
+----------
+To connect to your  servers:
+1)  You must have BEAKER_destroy=no  (or onpass)  so it won't destroy the systems.
+2) The servers are set up with ssh on port  2200 - 220n  for however many serer you have.
+    use ssh localhost -p 2200 -l root   and use password puppet.
+
+
+

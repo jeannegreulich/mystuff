@@ -1,0 +1,69 @@
+I got this working in a manual setup doing the following:
+---------------------------------------------------
+Changed my entry in DHCP to point to my new TFTP server and the new filename:
+
+  host speedy05.tasty.bacon {
+    hardware ethernet 50:9a:4c:4c:24:9f;
+    fixed-address 10.0.71.135;
+    next-server       10.0.71.223;
+    filename          "BOOTX64.efi";
+  }
+----------------------------------------------------------------
+
+Set up TFTP server by copying the files in EFI/BOOT from the DVD to the tftp root directory.
+Copied the images from images/pxeboot to centos-7-x86_64 directory under tftp root.
+
+Make sure everything is owned root:nobody and world readable.
+
+Edit the grub.cfg to contain the following (possibly the pxeclient.cfg directory works the same way for UEFI as it does for BIOS but I did not try.):
+***** start of grub.cfg ***
+  set default="1"
+
+  function load_video {
+    insmod efi_gop
+    insmod efi_uga
+    insmod video_bochs
+    insmod video_cirrus
+    insmod all_video
+  }
+
+  load_video
+  set gfxpayload=keep
+  insmod gzio
+  insmod part_gpt
+  insmod ext2
+
+  set timeout=6
+  ### END /etc/grub.d/00_header ###
+
+  search --no-floppy --set=root -l 'CentOS 7 x86_64'
+
+  ### BEGIN /etc/grub.d/10_linux ###
+  menuentry 'Install CentOS 7' --class fedora --class gnu-linux --class gnu --class os {
+          linuxefi /centos7/vmlinuz inst.gpt inst.noverifyssl ks=https://10.0.71.106/ks/pupclient_x86_64_efi_ssd.cfg
+        initrdefi /centos7/initrd.img
+  }
+**** end ****
+(Not sure need the inst.gpt may be taken care of by insmod part_gpt line. )
+
+-----------------------------------------------------------------------
+For the kickstart files:
+
+pupclient:
+- commented out the FIPS stuff becuase I wasn't ready to chance that yet.
+- add grub-efi-x64 to the list of packages
+repodetect:
+- changed the repos to include Updates:
+     cat << EOF > /tmp/repo-include
+repo --name="Server" --baseurl="$uri_header"
+repo --name="Updates" --baseurl="$uri_header/Updates"
+repo --name="Local" --baseurl="$local_header"
+EOF
+fi
+
+I don't know how the repo in the top level was created.  I thought  unpack_dvd but now I am thinking maybe from the ISO build?
+
+Any way, It does not include the grub2-efi-x64 ( and probably some dependancies)  so I just added the Updates repo to the repodetect instead of updating the top level.  You need that LiveOS squashfs.img file at the top level to boot so you can't just change the url setting in pupclient file.
+
+
+For some reason, when booting the dells, it shows nothing when it start PXE.  You can't tell if it talking to the DHCP server.  It just starts loading.  If it fails it will ask if you want to try again, if it works, it goes dark for a while, until you sure something is wrong and then the penguins appear and you start seeing boot messages.
