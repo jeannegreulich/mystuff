@@ -1,7 +1,6 @@
 version=$2
 num=$1
 
-name="libvirtjmg$1-$2-$addr"
 vmdir="/var/jmg/libvirtVM"
 cdromdir="/var/jmg/ISO"
 
@@ -72,14 +71,11 @@ if (( $1 >= 99 || $1 <= 0 )); then
 fi
 
 
-vmpath="$vmdir/$name"
-diskpath="$vmpath/DISK$1-$2"
-if [ -d $vmpath ]; then
-  mv $vmpath $vmpath.`date +%Y%j%H%M`
+name="libvirtjmg$1-$2-$addr"
+diskpath="$vmdir/DISK-$name"
+if [ -d $diskpath ]; then
+  mv $diskpath $diskpath`date +%Y%j%H%M`
 fi
-mkdir -p $vmpath
-chmod 755 $vmpath
-chgrp kvm $vmpath
 
 if (( $1 < 10 )) ; then
  fill="0"

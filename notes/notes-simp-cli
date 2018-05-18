@@ -1,0 +1,3 @@
+To install the gem on the puppet server:
+
+gem install --local --install-dir /usr/share/simp/ruby --force /tmp/simp-cli-4.1.0.gem --no-rdoc --no-ri

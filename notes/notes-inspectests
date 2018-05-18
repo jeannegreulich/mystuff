@@ -1,0 +1,74 @@
+Set up the stig viewer:
+
+Download stig viewer from the and STIGS:
+(see SIMP-4601)
+
+This n=info is in SIMP-4601
+
+http://iasecontent.disa.mil/stigs/zip/U_STIGViewer-2.7.zip
+  extract the jar file.
+
+You need Oracle JRE to use stig viewer:
+  http://www.oracle.com/technetwork/java/javase/downloads/jre10-downloads-4417026.html
+
+Here are the stigs:
+(Other STIGS are in SIMP-4601)
+
+https://iasecontent.disa.mil/stigs/zip/U_Red_Hat_Enterprise_Linux_7_V1R4_STIG.zip
+https://iasecontent.disa.mil/stigs/zip/U_BIND_9-x_V1R3_STIG.zip
+
+
+----------------------------------------------------------------------------------------------
+In the inspec-profile-disa_stig-el7 module identify any tests that pertain to your module and
+add a susbsystem tag  to identify that you want to run the tests against the module you are
+configuring.  In this case I am using the tag "ssh":
+ie for control/V-72235.rb
+...
+  tag "cci": "CCI-002421"
+  tag "nist": ["SC-8 (1)", "Rev_4"]
+  tag "cci": "CCI-002422"
+  tag "nist": ["SC-8 (2)", "Rev_4"]
+  tag "subsystems": ["ssh"]
+  tag "check": "Verify SSH is loaded and active with the following command:
+
+  # systemctl status sshd
+   sshd.service - OpenSSH server daemon
+   Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled)
+....
+------------------------------------------------------------------------------------
+In the simp module that will run the test (pupmod-simp-ssh in this example:
+(I copied the files over from the pam module but had to put some fixes in.)
+
+1) copy the spec/fixtures/inspec_profiles
+   directory.  This contains the main inspec control test.
+   You need to update this to point to the tests you want from a perviously done
+   test.  (Can we make this a generic module and just pass in the tag?)
+
+2) Update the test  spec/fixtures/inspec_profiles/RedHat-7-disa_stig/controls/00_Control_Selector.rb
+  to check for the correct tag used above.
+
+3) Add the inspec module to the fixtures file:
+
+      disa_stig-el7-baseline:
+      repo: https://github.com/simp/inspec-profile-disa_stig-el7
+      branch:  master
+      target: spec/fixtures/inspec_deps/inspec_profiles/profiles
+
+Note: you need simp-beaker-helpers 1.10.5 or later.  That is what copies these
+modules to the correct place for the acceptance tests to work.
+
+4) Copy the spec test suite over:
+   spec/acceptance/suites/compliance
+
+NOTE: I had to make some hacks in the test themselves to make sure thatbeaker helpers
+could copy files over once ssh was locked down so you might want to stick with the 
+pam tests for a start.  How ever I also added the simp-dependancy repo to the nodeset
+and you will probably need that for haveged and other dependancies if you module
+needs them.
+
+
+---------------------------------------------------------------------------------
+I also had to add settings to the pupmod-simp-compliance_markup module.
+
+
+   
