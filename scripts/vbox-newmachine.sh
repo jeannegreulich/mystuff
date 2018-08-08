@@ -40,36 +40,36 @@ v1|1)  NW="vboxnet1"
      vport=5900
      addr=1
      if [[ $version == "67" ]]; then
-       macprefix="AABBBBAA00"
+       macprefix="AABBCCAA00"
      else
-       macprefix="AABBAAAA00"
+       macprefix="AABBCCAA00"
      fi
 ;;
 v4|4)  NW="vboxnet4"
      vport=5700
      addr=4
      if [[ $version == "67" ]]; then
-       macprefix="AACCCCBB00"
+       macprefix="AABBCCDD00"
      else
-       macprefix="AACCCCBB00"
+       macprefix="AABBCCDD00"
      fi
 ;;
 v3|3)  NW="vboxnet3"
      vport=5800
      addr=3
      if [[ $version == "67" ]]; then
-       macprefix="AACCCCAA00"
+       macprefix="AABBCCCC00"
      else
-       macprefix="AACCCCAA00"
+       macprefix="AABBCCCC00"
      fi
 ;;
 v2|2)  NW="vboxnet2"
      vport=5950
      addr=2
      if [[ $version == "67" ]]; then
-       macprefix="AACCCCBB00"
+       macprefix="AABBCCAA00"
      else
-       macprefix="AACCCCAA00"
+       macprefix="AABBCCAA00"
      fi
 ;;
 *)  NW="vboxnet0"
@@ -140,6 +140,7 @@ echo "turn on vrde"
 VBoxManage modifyvm $VM --vrde on
 VBoxManage modifyvm $VM --vrdeauthtype null
 VBoxManage modifyvm $VM --firmware bios
+#VBoxManage modifyvm $VM --firmware efi
 
 #Check if you need to attach the DVD and set the mac address
 if (( $1 < 10 )) ; then
@@ -188,4 +189,5 @@ VBoxManage modifyvm $VM --vrdeproperty "Security/ServerCertificate=/etc/pki/simp
 
 VBoxManage modifyvm $VM --vrdeproperty "Security/ServerPrivateKey=/etc/pki/simp_apps/packer/packer-vagrant.pem"
 
+#VBoxManage startvm $VM --type headless
 VBoxManage startvm $VM --type headless
