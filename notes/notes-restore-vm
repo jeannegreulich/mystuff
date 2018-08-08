@@ -1,0 +1,16 @@
+# create the machine from the config xml backup:
+virsh define --file /var/backup/jmgserver220/2018-08-08.155323/jmgserver220.xml 
+
+# list where its disk is
+virsh domblklist jmgserver220
+
+# remove the newly created disk
+ls -la /var/VM/jmgserver220/DISK-jmgserver220
+rm -f /var/VM/jmgserver220/DISK-jmgserver220
+
+# copy the backed up disk into place
+cp /var/backup/jmgserver220/2018-08-08.155323/DISK-jmgserver220  /var/VM/jmgserver220/DISK-jmgserver220
+
+# start the machine
+virsh start jmgserver220
+

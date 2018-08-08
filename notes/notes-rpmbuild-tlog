@@ -1,0 +1,13 @@
+1) Clone tlog and add pull request 200 from trevor
+  git clone https://github.com/Scribery/tlog
+  hub checkout https://github.com/Scribery/tlog/pull/200
+
+2) From the README:
+  Install required build dependancies:
+   -  yum install systemd-devel json-c-devel libcurl-devel
+
+
+  autoreconf -i -f
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var && make
+
+./configure --prefix=/usr --sysconfdir=/etc && make dist

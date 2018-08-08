@@ -1,0 +1,4 @@
+Converting my ssh key to work with gnome.
+Copy the pub key to orig and run the following to generate the new public key (PKCS#1)
+
+ssh-keygen -e -m pem -f id_rsa.pub.orig > id_rsa.pub
