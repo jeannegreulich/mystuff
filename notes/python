@@ -1,0 +1,8 @@
+- umask 0022
+- enable epel
+- yum install python36
+- yum install python36-sphinx.noarch
+- yum install  python3.6-pip
+-
+NOTE: this is not working yet.
+ 

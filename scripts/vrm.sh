@@ -3,9 +3,8 @@
 machine=$1
 
 virsh destroy $machine
-virsh undefine $machine
-virsh pool-destroy DISK-$machine
-virsh pool-undefine DISK-$machine
+virsh undefine --nvram $machine
+virsh vol-delete DISK-$machine libvirtVM
 
 if [ -d /var/jmg/VM/$machine ]; then
   rm -rf /var/jmg/VM/$machine

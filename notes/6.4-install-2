@@ -1,0 +1,60 @@
+# ISO was built using master on all SIMP pupmods
+#  and assets.
+# Left externals to what was in the current Puppetfile.tracking
+#  which  was what was in simp-core master on March 23, 2019
+#
+boot from ISO
+
+cd /etc/puppetlabs/core/environment/production
+simp puppetfile generate --skeleton > Puppetfile
+
+#ticket 6326 has been added for problems with 
+# managing site.  My work around is
+# I had to rebuild  stdlib and site  because it pulled an
+# old one down from repo instead of rebuilding
+# with simp-rake-helpers to use posttrans instead of post.
+# I edited simp-core/build/rpm/dependencies.yml and
+# added 
+#
+# 'site':
+#   :release: '1'
+# 'stdlib':
+#  :release: '1'
+#  This forces a rebuild to verzion x.y.z-1 from x.y.z-0
+#  to apply changes made in simp-adapter.
+#  put in ticket SIMP-6326 to determine what we are going to do with site
+#  module. (note: SIMP-6247 does not fix this. It is still using site 2.0.6
+#  which is compiled with the old adapter.)
+#
+#  stdlib error should be fixed by SIMP-6247, which has PR out there
+#  https://github.com/trevor-vaughan/simp-core/edit/SIMP-6247/Puppetfile.tracking?pr=%2Fsimp%2Fsimp-core%2Fpull%2F613
+
+
+simp puppetfile generate > Puppetfile.simp
+
+simp config
+#
+# Getting error target dir must be an absolute path during
+# Applying: Copy SIMP environment into Puppet environment
+# path
+
+cp -R /usr/share.simp/environments/simp /etc/puppetlabs/code/environments
+
+chown -R /etc/puppetlabs/code/environments/
+# Ticket for environment fix is SIMP-6311.  All it says is what are we going to do with
+# environment?
+
+yum install simp-vendored-r10k
+# I had to import a bunch of keys.  
+
+sg puppet -c '/usr/share/simp/bin/r10k puppetfile install --puppetfile /etc/puppetlabs/code/environment/simp/Puppetfile --moduledir /etc/puppetlabs/code/environment/simp/modules'
+
+
+simp config
+#  was able to step through now without error
+simp bootstrap
+
+# It appears to be running now.
+
+Ater bootstrap the only errors were rkhunter errors.
+

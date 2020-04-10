@@ -1,0 +1,32 @@
+
+# In order to log in as the postgres you need to add postgres user to the /etc/security/access.conf file to give it login access.
+
+
+To remove and readd the puppetdb do the folllowing:
+
+Disconnect the puppetdb from puppet sever (instructions in the simp docs.)
+
+puppet agent --disable
+vi /etc/security/access.conf 
+  add line 
++:postgres:ALL
+
+su postgres
+dropdb puppetdb
+#Log into postgresql and list databases to see if puppet db is gone
+psql
+> \list
+> \q
+exit
+# you should be back as root
+#remove extraneous data outside of puppet db
+cd /opt/puppetlabs/server/data/puppetdb/
+rm -rf *
+ls -la /opt/puppetlabs/server/data/
+# Make sure puppetdb directory still exists had perms 770 and is owned by puppetdb:puppetdb.
+
+puppet agent --enable 
+puppet agent -t
+
+# The puppetdb server should be restored.
+

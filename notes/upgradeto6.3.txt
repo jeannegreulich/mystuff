@@ -1,0 +1,119 @@
+
+1) Uppack CentOS 7.5 ISO and run yum update --enablerepo=os_updates on all systems.
+
+   cd /var/www/yum
+   unlink 7
+   mkdir 7.5.1804
+   chown root:apache 7.5.1804; chmod 750 7.5.1804
+   ln -s 7.5.1804 7
+   /usr/local/bin/unpack_dvd  -d /var/www/yum /var/ISO/CentOS-7.5.iso
+
+   yum update --enablerepo=os_updates on all systems
+
+
+2) reboot the systems
+
+3) If using simp kickstart - update the kick start files to 7.5
+
+
+cp /var/www/yum/CentOS/7.4.1708/x86_64/images/* /var/simp/environments/<your environment>/rsync/CentOS/Global/tftpboot/linux-install/centos-7.5.1804-x86_64
+cd /var/simp/environments/<your environment>/rsync/CentOS/Global/tftpboot/linux-install/
+chown -R root:nobody centos-7.5.1804-x86_64
+chmod -R g+rX centos-7.5.1804-x86_64
+restorecon -R centos-7.5.1804-x86_64
+chcon -R -u system_u centos-7.5.1804-x86_64
+unlink centos-7-x86_64
+ln -s centos-7.5.1804-x86_64 centos-7-x86_64
+
+
+4) unpack the SIMP ISO?????
+   reviewing simp-adapter and environment to understand how they work.
+   
+
+5) (MOUNT DVD and copy dev key to /var/www/yum/SIMP-Dev/GPGKEYS
+installed gpgkeys with --nogpgkey because I need the new gpg key
+installed gpgkeys with --nogpgkey because I need the new gpg key
+installedbs.trapperkeeper.services.metrics.metrics-service/metrics-webservice": "/metrics"
+
+to:
+
+     /etc/puppetlabs/puppetserver/conf.d/web-routes.conf
+ gpgkeys with --nogpgkey because I need the new gpg key
+
+6) add    puppetlabs.trapperkeeper.services.watcher.filesystem-watch-service/filesystem-watch-service
+to     /etc/puppetlabs/puppetserver/services.d/ca.cfg per Chris T.
+
+and add (per Chris t)
+
+   "puppetlabs.trapperkeeper.services.metrics.metrics-service/metrics-webservice": "/metrics"
+to:
+     /etc/puppetlabs/puppetserver/conf.d/web-routes.conf
+6.5) Update local filesystem repo (the os_update was hardcoded to point to 7.4.*  Changed it 7
+
+
+7) puppet agent --disable
+
+8) yum update --disablerepo=flocal-x86_64,simp
+   update the OS
+ 
+9) yum update 
+   update simp
+   (Note: lots of deprecation errors for stuff like 
+ Setting trurted_server_facts ...
+ Setting ca ...
+
+Warning: Setting trusted_server_facts is deprecated. 
+   (location: /opt/puppetlabs/puppet/lib/ruby/vendor_ruby/puppet/settings.rb:1169:in `issue_deprecation_warning')
+Warning: Setting ca is deprecated. 
+   (location: /opt/puppetlabs/puppet/lib/ruby/vendor_ruby/puppet/settings.rb:1169:in `issue_deprecation_warning')
+
+
+THese are expected.
+
+REBOOT  for OS changes and puppet changes
+
+10) enable puppet
+
+    run puppet agent -t
+
+   "After puppet run you need to use sudo su - root instead of sudo sudosh to 
+    swithc to root"
+
+11)  I got error in my code
+    Class[Simp_nfs] -> Class[Site::Nfs_Client]   had t  put 
+    quotes around the "Simp_nfs" and "Site::Nfs_Cliet"
+
+
+12) Update hiera for each environmentexit
+
+
+ cp /usr/share/environments/simp/hiera.yaml /etc/puppetlabs/code/environments/simp/
+ cd /etc/puppetlabs/code/environments/simp/
+ chmod 640 ./hiera..yml
+ chwon root:puppet ./hiera.yaml
+ cd mv hieradata to data
+
+13) When you have updated all your environments
+    update the global hiera.yaml file:
+
+   cd /etc/puppetlabs/puppet 
+   unlink hiera.yaml
+   cp hiera.yaml.rpmnew hiera.yaml
+   rm hiera.yaml.simp
+   chwon root:puppet hiera.yaml
+   chmod 640 hiera.yaml
+
+ 
+14) Update to latest ruby:
+
+#does not work because pupmod deletes it.
+
+# I added a  line pupmod template.  Just for fun. 
+
+JRUBY_JAR="/opt/puppetlabs/server/apps/puppetserver/jruby-9k.jar"
+
+to /etc/sysconfig/puppetserver
+
+restart puppet server.
+
+ 

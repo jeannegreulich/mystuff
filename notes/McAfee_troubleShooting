@@ -1,0 +1,39 @@
+ 474  systemctl restart ma
+  475  ps -ef | grep ma
+  476  /bin/sh /opt/McAfee/agent/scripts/ma stop
+  477  ps -ef | grep ma
+  478  systemctl restart cma ma
+  479  ps -ef | grep ma
+  480  /bin/sh /opt/McAfee/agent/scripts/ma stop
+  481  ps -ef | grep ma
+  482  cd /var/McAfee/
+  483  ls -al
+  484  cd agent
+  485  ls -la
+  486  cd logs
+  487  ls -al
+  488  vim McScript.log
+  489  history
+  490  vim McScript.log
+  491  /opt/McAfee/agent/bin/maconfig -enforce -loglevel 2
+  492  systemctl restart ma
+  493  ls -al
+  494  vim McScript.log
+  495  vim masvc_tastyldap.log
+  496  ps -ef | grep mcaf
+  497  /opt/McAfee/agent/bin/masvc  stop
+  498  /opt/McAfee/agent/bin/macompatsvc stop
+  499  /opt/McAfee/agent/bin/macmnsvc stop
+  500  /opt/McAfee/agent/bin/macompatsvc start
+  501  systemctl status ma
+  502  systemctl restart cma
+  503  cd /etc/openldap
+  504  ls -al
+  505  vim dynamic_includes 
+  506  cd /var/McAfee/agent/logs
+  507  ls -al
+  508  vim McScript.log 
+  509  systemct status ma cma nail
+  510  systemctl status ma cma nail
+  511  /opt/McAfee/agent/bin/cmdagent -p; tail -f /var/McAfee/agent/logs/*.log
+

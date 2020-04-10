@@ -42,50 +42,89 @@ v2|2)  nw="virbr2"
      fi
 ;;
 esac
+# Shift pass the three required params
+shift;shift;shift
 
+#set default tye for dick bus type to IDE for BIOS systems
+bustype='ide'
+
+EXTRA_OPTIONS=''
+while [[ $# -gt 0 ]]
+do
+  key=$1
+  case $key in
+    -u| --uefi)
+      EXTRA_OPTIONS="--boot uefi"
+      bustype='sata'
+      shift
+      ;;
+  esac
+done
+
+force_boot_cdrom='no'
 case $version in
 42) cdrom="${cdromdir}/42DVD.iso"
+    osvar="rhel6"
 ;;
 51) cdrom="${cdromdir}/51DVD.iso"
+    osvar="rhel7"
 ;;
-7)  cdrom="/net/ISO/Distribution_ISOs/CentOS-7-x86_64-DVD-1708.iso"
+7)  cdrom="/var/jmg/ISO/CentOS-7-x86_64-DVD-1810.iso"
+    osvar="rhel7"
+    force_boot_cdrom='yes'
 ;;
-6)  cdrom="/net/ISO/Distribution_ISOs/CentOS-6.9-x86_64-bin-DVD1.iso"
+6)  cdrom="/net/ISO/Distribution_ISOs/CentOS-6.10-x86_64-bin-DVD1.iso"
+    osvar="rhel6"
+    force_boot_cdrom='yes'
 ;;
-66)  cdrom="${cdromdir}/simp6-centos6.iso"
+66) cdrom="${cdromdir}/simp6-centos6.iso"
+    osvar="rhel6"
 ;;
-67)  cdrom="${cdromdir}/simp6-centos7.iso"
+67) cdrom="${cdromdir}/simp6-centos7.iso"
+    osvar="rhel7"
 ;;
-R7)  cdrom="/net/ISO/Distribution_ISOs/rhel-server-7.4-x86_64-dvd.iso"
+77) cdrom="${cdromdir}/bridge-centos7.iso"
+    osvar="rhel7"
+    force_boot_cdrom='yes'
+;;
+R7) cdrom="/net/ISO/Distribution_ISOs/rhel-server-7.4-x86_64-dvd.iso"
+    osvar="rhel7"
+    force_boot_cdrom='yes'
 ;;
 *)  echo "No match for version"
-    echo "Version = $2"
+    echo "Version = $version"
    exit
 ;;
 esac
 
-if (( $1 >= 99 || $1 <= 0 )); then
+if (( $num >= 99 || $num <= 0 )); then
     echo  "first parameter must be 1-99\n"
-    echo   "You entered $1."
+    echo   "You entered $num"
     exit
 fi
 
 
-name="libvirtjmg$1-$2-$addr"
-diskpath="$vmdir/DISK-$name"
+name="libvirtjmg$num-$version-$addr"
+diskpath="${vmdir}/DISK-${name}"
 if [ -d $diskpath ]; then
-  mv $diskpath $diskpath`date +%Y%j%H%M`
+  mv $diskpath ${diskpath}`date +%Y%j%H%M`
 fi
 
-if (( $1 < 10 )) ; then
+
+if (( $num < 10 )) ; then
  fill="0"
- mac="$macprefix$fill$1"
-command="virt-install --name=$name -r 4096 --vcpu=2 --vnc --os-type=linux --network=bridge:$nw -m $mac --disk path=$diskpath,size=150,sparse='true' -v --accelerate --cdrom=$cdrom"
+ mac="${macprefix}${fill}${num}"
+#command="virt-install --name=$name -r 4096 --vcpu=2 --vnc --os-variant=$osvar --os-type=linux --network=bridge:$nw -m $mac --disk path=$diskpath,bus=${bustype},size=75,sparse='true' --disk device=cdrom,bus=${bustype},path=$cdrom -v --accelerate $EXTRA_OPTIONS"
+command="virt-install --name $name --ram 4096 --vcpu=2 --graphics vnc --os-variant=$osvar --os-type=linux --network bridge=$nw,mac=$mac,model=rtl8139 --disk path=$diskpath,bus=${bustype},size=75,sparse='true' --disk device=cdrom,bus=${bustype},path=$cdrom -v --accelerate $EXTRA_OPTIONS"
 # command="virt-install --name=$name -r 4096 --vcpu=2 --vnc --os-type=linux --network=bridge:virbr0 -m $mac --import --disk path=$diskpath -v --accelerate"
 else
  fill=""
- mac="$macprefix$fill$1"
- command="virt-install --name=$name --memory 4096 --vcpus=2 --vnc --os-type=linux --network bridge=$nw,mac=$mac,model=rtl8139 --disk path=$diskpath,size=50,sparse='true' -v --accelerate --pxe"
+ mac="${macprefix}${fill}${num}"
+  if [ $force_boot_cdrom == 'yes' ]; then
+    command="virt-install --name $name --ram 4096 --vcpu=2 --graphics vnc --os-variant=$osvar --os-type=linux --network bridge=$nw,mac=$mac,model=rtl8139 --disk path=$diskpath,bus=${bustype},size=75,sparse='true' --disk device=cdrom,bus=${bustype},path=$cdrom -v --accelerate $EXTRA_OPTIONS"
+  else
+    command="virt-install --name $name --ram 512 --vcpus=2 --graphics vnc --os-variant=$osvar --os-type=linux --network bridge=$nw,mac=$mac,model=rtl8139 --disk path=$diskpath,size=50,sparse='true',bus=${bustype} -v --accelerate  $EXTRA_OPTIONS --pxe"
+  fi
 fi
 
 echo $command

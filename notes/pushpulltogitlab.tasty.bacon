@@ -1,0 +1,7 @@
+Get list of repos from simp-core
+  wget https://raw.githubusercontent.com/simp/simp-core/master/Puppetfile.pinned
+For each on push it to gitlab
+ git clone --bare https://github.com/simp/pupmod-simp-at
+ cd pupmod-simp-at.git/
+ git push --mirror git@gitlab.tasty.bacon:simp/attack-of-the-clones/pupmod-simp-at.git
+

@@ -1,3 +1,18 @@
+----------------------------
+to run pry on a beaker test system:
+1) pry-debug does not work on puppet 4.10 for some reason so don't bother.
+I was able to get it to work on puppet 5 (ruby 2.4 is the reason I believe)
+
+2) To install do the follwoing:
+   a) use BEAKER_destroy=no BEAKER_PUPPET_COLLECTION='puppet5'
+   b) log in and switch to root.
+   c) yum install gcc
+   d) cd /opt/puppetlabs/puppet/lib/ruby/gems
+   e) gem install -i ./2.4.5 pry   
+       (note 2.4.5 is the version of ruby, it might change)
+   f) gem install -i ./2.4.5 pry-byebug
+
+
 The  README file for the  simp/rubygems-simp-beaker-helpers in github has some documentation on variables you can set to speed things up.  https://github.com/simp/rubygem-simp-beaker-helpers
 
 You should also read the Beaker Help on the Beaker site.
@@ -13,5 +28,22 @@ To connect to your  servers:
 2) The servers are set up with ssh on port  2200 - 220n  for however many serer you have.
     use ssh localhost -p 2200 -l root   and use password puppet.
 
+---------------------------
+If the nodes can not connect to extrenal sources (like centos to do yum updates) update the nodeset with the following lines so it will look for them locally:
 
+  epel_url: http://<IP address of internal yum server> # don't use internet for initial yum
+  add_el_extras: false             # don't add "extra packages" for EPEL
 
+You can also arrange to run a  Vagrant shell provisioner to set things on the VM:
+https://github.com/puppetlabs/beaker-vagrant/blob/master/docs/vagrant.md#adding-vagrant-shell-provisioner
+
+    ```shell_provisioner:
+      path: /home/user/scripts/bootstrap.sh```
+
+docs/vagrant.md
+
+```# Vagrant
+
+Vagrant's slogan is "development environments made easy". Vagrant provides an
+abstraction on top of a VM or cloud provider that allows you to manage
+hosts and their provisioning. https://www.vagrantup.com/.```

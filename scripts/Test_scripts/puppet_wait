@@ -1,0 +1,36 @@
+#!/bin/bash
+#A puppet  init script for running the puppet client daemon once and waiting for certs
+#
+# Author:       Duane Griffin <d.griffin@psenterprise.com>
+#               David Lutterkort <dlutter@redhat.com>
+#
+# chkconfig: - 97 03
+#
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+PATH=/usr/bin:/sbin:/bin:/usr/sbin
+export PATH
+
+start() {
+     chkconfig puppetd off
+     echo -n $"Starting puppet agent with waitforcert:"
+     puppet agent --no-daemonize --onetime --waitforcert 0
+     RETVAL=$?
+     chkconfig puppetd on
+     chkconfig puppet_wait off
+     return $RETVAL
+}
+
+
+case "$1" in
+    start)
+        start
+    ;;
+    *)
+        echo $"Usage: $0 {start}"
+        exit 1
+esac
+
+exit $RETVAL

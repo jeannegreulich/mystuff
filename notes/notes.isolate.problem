@@ -1,0 +1,70 @@
+- imessage in messages:
+---------------------------------------------------------------------
+/var/log/messages from system where it hangs:
+2018-08-08T09:59:40.879103-04:00 ws152.tasty.bacon sm-notify[22200]: Version 1.3.0 starting
+2018-08-08T09:59:40.879407-04:00 ws152.tasty.bacon sm-notify[22200]: Already notifying clients; Exiting!
+2018-08-08T09:59:40.953698-04:00 ws152.tasty.bacon container-storage-setup: ERROR: Failed to determine existing storage driver.
+2018-08-08T09:59:41.583257-04:00 ws152.tasty.bacon kdumpctl: Secure Boot is enabled. Using kexec file based syscall.
+2018-08-08T09:59:41.599954-04:00 ws152.tasty.bacon kdumpctl: kexec_file_load failed: Required key not available
+2018-08-08T09:59:41.600451-04:00 ws152.tasty.bacon kdumpctl: kexec: failed to load kdump kernel
+2018-08-08T09:59:41.600595-04:00 ws152.tasty.bacon kdumpctl: Starting kdump: [FAILED]
+2018-08-08T09:59:41.771573-04:00 ws152.tasty.bacon NetworkManager[1573]: <info>  [1533736781.7704] ifcfg-rh: remove /etc/sysconfig/network-scripts/ifcfg-em1 (1dad842d-1912-ef5a-a43a-bc238fb267e7,"System em1")
+2018-08-08T09:59:41.992256-04:00 ws152.tasty.bacon network: Bringing up loopback interface:  [  OK  ]
+2018-08-08T09:59:42.094227-04:00 ws152.tasty.bacon network: Bringing up interface enp0s31f6:  [  OK  ]
+2018-08-08T09:59:42.190628-04:00 ws152.tasty.bacon network: Bringing up interface br1:  [  OK  ]
+2018-08-08T09:59:42.199887-04:00 ws152.tasty.bacon network: RTNETLINK answers: File exists
+2018-08-08T09:59:42.204716-04:00 ws152.tasty.bacon network: message repeated 8 times: [RTNETLINK answers: File exists]
+2018-08-08T09:59:42.218943-04:00 ws152.tasty.bacon delMgr: Starting delMgr: delMgr already running: 1044
+
+Then it hangs.
+
+------------------------------------------------------------------
+/var/log/messages from system where it works:
+2018-08-08T10:02:08.705918-04:00 ws151.tasty.bacon delMgr: Starting delMgr: delMgr already running: 32181                                                                           
+2018-08-08T10:02:08.716620-04:00 ws151.tasty.bacon sm-notify[31912]: Version 1.3.0 starting                                                                                         
+2018-08-08T10:02:08.716955-04:00 ws151.tasty.bacon sm-notify[31912]: Already notifying clients; Exiting!
+2018-08-08T10:02:08.734536-04:00 ws151.tasty.bacon pcscd: 00000000 utils.c:53:GetDaemonPid() Can't open /var/run/pcscd/pcscd.pid: No such file or directory
+2018-08-08T10:02:08.824264-04:00 ws151.tasty.bacon container-storage-setup: ERROR: There is not enough free space in volume group VolGroup00 to create data volume of size MIN_DATA_SIZE=2G.
+2018-08-08T10:02:09.294598-04:00 ws151.tasty.bacon kdumpctl: Secure Boot is enabled. Using kexec file based syscall.
+2018-08-08T10:02:09.311982-04:00 ws151.tasty.bacon kdumpctl: kexec_file_load failed: Required key not available
+2018-08-08T10:02:09.312595-04:00 ws151.tasty.bacon kdumpctl: kexec: failed to load kdump kernel
+2018-08-08T10:02:09.312769-04:00 ws151.tasty.bacon kdumpctl: Starting kdump: [FAILED]
+-------
+ws150 -network status good
+ws152  - network status good
+
+systemctl status gdm:
+
+● gdm.service - GNOME Display Manager
+   Loaded: loaded (/usr/lib/systemd/system/gdm.service; enabled; vendor preset: enabled)
+   Active: active (running) since Fri 2018-08-03 09:14:30 EDT; 5 days ago
+  Process: 5049 ExecStartPost=/bin/bash -c TERM=linux /usr/bin/clear > /dev/tty1 (code=exited, status=0/SUCCESS)
+ Main PID: 5030 (gdm)
+    Tasks: 6
+   CGroup: /system.slice/gdm.service
+           ├─5030 /usr/sbin/gdm
+           └─5066 /usr/bin/X :0 -background none -noreset -audit 4 -verbose -auth /run/gdm/auth-for-gdm-K3XuH5/database -seat seat0 vt1
+● gdm.service - GNOME Display Manager
+   Loaded: loaded (/usr/lib/systemd/system/gdm.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2018-08-08 09:30:45 EDT; 37min ago
+ Main PID: 26584 (gdm)
+    Tasks: 6
+   CGroup: /system.slice/gdm.service
+           ├─26584 /usr/sbin/gdm
+           └─26590 /usr/bin/X :0 -background none -noreset -audit 4 -verbose -auth /run/gdm/auth-for-gdm-zHsBQm/database -seat seat0 vt1
+-----------------------------------
+ws154 after rebooting:
+
+2018-08-08T10:14:47.215992-04:00 ws154.tasty.bacon pcscd: 00000000 utils.c:53:GetDaemonPid() Can't open /var/run/pcscd/pcscd.pid: No such file or directory
+2018-08-08T10:14:47.385897-04:00 ws154.tasty.bacon kdumpctl: Secure Boot is enabled. Using kexec file based syscall.
+2018-08-08T10:14:47.402006-04:00 ws154.tasty.bacon kdumpctl: kexec_file_load failed: Required key not available
+2018-08-08T10:14:47.402209-04:00 ws154.tasty.bacon kdumpctl: kexec: failed to load kdump kernel
+2018-08-08T10:14:47.402350-04:00 ws154.tasty.bacon kdumpctl: Starting kdump: [FAILED]
+2018-08-08T10:16:57.763804-04:00 ws154.tasty.bacon sshd[17157]: rexec line 159: Deprecated option RhostsRSAAuthentication
+2018-08-08T10:16:58.282456-04:00 ws154.tasty.bacon systemd-logind: New session 3 of user jgreulich.
+2018-08-08T10:17:26.316081-04:00 ws154.tasty.bacon gnome-session-binary[6549]: WARNING: Could not get session path for session. Check that logind is properly installed and pam_systemd is getting used at login.
+2018-08-08T10:17:26.318367-04:00 ws154.tasty.bacon gnome-session: gnome-session-binary[6549]: WARNING: Could not get session path for session. Check that logind is properly installed and pam_systemd is getting used at login.
+2018-08-08T10:17:26.321376-04:00 ws154.tasty.bacon journal: pushModal: invocation of begin_modal failed
+2018-08-08T10:17:26.321660-04:00 ws154.tasty.bacon journal: pushModal: invocation of begin_modal failed
+2018-08-08T10:17:26.321821-04:00 ws154.tasty.bacon journal: error: Unable to lock: Lock was blocked by an application
+

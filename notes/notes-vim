@@ -7,3 +7,11 @@ Once you are in use ctl-w and the arrow keys to move back and forth.
 Use ctl-w  shift L  to make the windows next to each other from side-by-side.
 
 The help command for working  in windows while you are in windows is :help windows.
+
+
+zg adds word to spelling list
+
+F7 toggles between spell check mode (see .vimrc for the setup)
+
+]s goes to next mis-spelled word
+

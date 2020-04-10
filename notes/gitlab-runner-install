@@ -1,0 +1,106 @@
+
+ su - gitlab-runner  -c 'gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB'
+ yum install -y autoconf automake bison gcc-c++ libffi-devel libtool readline-devel ruby sqlite-devel openssl-devel
+ su - gitlab-runner  -c 'gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB'
+ su - gitlab-runner  -c '\curl -sSL https://get.rvm.io | bash -s stable'
+ su - gitlab-runner  -c 'rvm install 2.4.4'
+ su - gitlab-runner  -c 'rvm install 2.4.9'
+ su - gitlab-runner  -c 'rvm install 2.4.5'
+ su - gitlab-runner  -c 'rvm install 2.5.5'
+ su - gitlab-runner  -c 'rvm install 2.5.7'
+ su - gitlab-runner -c 'gem install bundler'
+ su - gitlab-runner  -c 'rvm use 2.5.5; gem install bundler -v 1.17.1'
+ su - gitlab-runner  -c 'rvm use 2.5.7; gem install bundler -v 1.17.1'
+ su - gitlab-runner  -c 'rvm use 2.4.9; gem install bundler -v 1.17.1'
+ su - gitlab-runner  -c 'rvm use 2.4.5; gem install bundler -v 1.17.1'
+ su - gitlab-runner  -c 'rvm use 2.4.4444; gem install bundler -v 1.17.1'
+
+mkdir /bigdata/VirtualBoxVMs
+chown gitlab-runner /bigdata/VirtualBoxVMs
+su - gitlab-runner -c 'VBoxManage setproperty machinefolder /bigdata/VirtualBoxVMs'
+
+In hiera I have updated the versions of vagrant (2.2.5) and virtualbox (6.0) and the virtual box extention pack (6.0)
+(NOTE:  I downloaded the rpm for vagrant and signed it with my gpg key and put it in our 
+local repo which has my key and chris's key.)
+
+# 10/31/2019   Happy Halloween
+It looks like gitlab updated to version 12.   I disabled the gitlab repo so it would not update on its own...but who knows it seems to have a mind of its own.
+
+I was getting a git error, expecting shallow list (or something like that).  Turns out that gitlab 12 needs git version 2 which  is not in the official release of centos yet.
+
+on the gitlab server:
+I installed the ius repos and  uninstalled git and  installed git2u on the gitlab server:
+yum install https://repo.ius.io/ius-release-el7.rpm
+vim /etc/yum.repos.d/ius* and disable all ius repos.
+yum remove git  (it removes git and perl-git)
+yum install --enablerepo=ius git2u (it install a few things.)
+
+on the clients:
+(first pause all the runners in the client from gitlab server. )
+yum install https://repo.ius.io/ius-release-el7.rpm
+vim /etc/yum.repos.d/ius* and disable all ius repos.
+
+yum remove git  (it removes git and perl-git and gitlab-runner)
+yum install --enablerepo=ius git2u
+yum install --enablerepo=runner_gitlab-runner gitlab-runner
+
+systemctl restart gitlab-runner
+
+go to the gitlab server and enable the runners.
+
+
+# Setup the runners (group runners for Attack of the CLones)
+#Add the docker runner
+gitlab-runner register --tls-ca-file=/etc/pki/simp_apps/tasty_gitlab_runner/x509/cacerts/cacerts.pem
+Runtime platform                                    arch=amd64 os=linux pid=13975 revision=ac8e767a version=12.6.0
+Running in system-mode.                            
+                                                   
+Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/):
+https://gitlab.tasty.bacon/
+Please enter the gitlab-ci token for this runner:
+vPFXs3hzRXzSrL-aDD83
+Please enter the gitlab-ci description for this runner:
+[supermario13.tasty.bacon]: Supermario13 AOC docker runner
+Please enter the gitlab-ci tags for this runner (comma separated):
+docker
+Registering runner... succeeded                     runner=vPFXs3hz
+Please enter the executor: docker-ssh, parallels, docker+machine, custom, docker, shell, ssh, virtualbox, docker-ssh+machine, kubernetes:
+docker
+Please enter the default Docker image (e.g. ruby:2.6):
+ruby:2.4.5
+Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded! 
+[root@supermario13 gitlab-runner]# vim /etc/gitlab-runner/config.toml 
+[root@supermario13 gitlab-runner]#  gitlab-runner register --tls-ca-file=/etc/pki/simp_apps/tasty_gitlab_runner/x509/cacerts/cacerts.pem
+Runtime platform                                    arch=amd64 os=linux pid=17007 revision=ac8e767a version=12.6.0
+Running in system-mode.                            
+                                                   
+Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/):
+https://gitlab.tasty.bacon/
+Please enter the gitlab-ci token for this runner:
+environment = ["GIT_SSL_NO_VERIFY=1", "GIT_SSL_CAPATH=/etc/pki/simp_apps/tasty_gitlab_runn^[[A^[[A^[[B^[[B^C                     
+# Add the shell runner
+gitlab-runner register --tls-ca-file=/etc/pki/simp_apps/tasty_gitlab_runner/x509/cacerts/cacerts.pem
+Runtime platform                                    arch=amd64 os=linux pid=17052 revision=ac8e767a version=12.6.0
+Running in system-mode.                            
+                                                   
+Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/):
+https://gitlab.tasty.bacon/
+Please enter the gitlab-ci token for this runner:
+vPFXs3hzRXzSrL-aDD83
+Please enter the gitlab-ci description for this runner:
+[supermario13.tasty.bacon]: supermario13 AOC shell runner
+Please enter the gitlab-ci tags for this runner (comma separated):
+beaker,rvm,vagrant,virtualbox    
+Registering runner... succeeded                     runner=vPFXs3hz
+Please enter the executor: docker, parallels, docker+machine, virtualbox, docker-ssh+machine, kubernetes, custom, docker-ssh, shell, ssh:
+shell
+Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded! 
+
+Then edit /etc/gitlab-runner/config.toml and add the environemnt line to the config.
+For shell runner:
+environment = ["GIT_SSL_CAPATH=/etc/pki/simp_apps/tasty_gitlab_runner/x509/cacerts", "GIT_CURL_VERBOSE=0"]
+
+
+
+For docker runner:
+environment = ["GIT_SSL_NO_VERIFY=1", "GIT_SSL_CAPATH=/etc/pki/simp_apps/tasty_gitlab_runner/x509/cacerts", "GIT_CURL_VERBOSE=0"]

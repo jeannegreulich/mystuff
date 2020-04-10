@@ -1,0 +1,8 @@
+How to read a certificate:
+
+openssl x509 -text -in ./yourfilename
+
+How to read a bundled CA:
+
+openssl crl2pkcs7 -nocrl -certfile ./tls-ca-bundle.pem   | openssl pkcs7 -print_certs -text -noout > /tmp/f
+

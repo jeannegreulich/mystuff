@@ -1,0 +1,25 @@
+
+1) unpack_dvd
+   - unlink 7 in /var/www/yum/CentOS/7
+   - relink to a 7.6 directory
+   - update the yum repo file copy the key down.
+
+2) yum update
+
+expect errors:
+
+warning: /var/simp/environments/simp/FakeCA/togen saved as /var/simp/environments/simp/FakeCA/togen.rpmsave
+warning: /var/simp/environments/simp/FakeCA/ca.cnf saved as /var/simp/environments/simp/FakeCA/ca.cnf.rpmsave
+libsemanage.semanage_direct_remove_key: Unable to remove module simp-environment at priority 400. (No such file or directory).
+/usr/sbin/semodule:  Failed!
+
+3) Install modules
+
+  162  simp puppetfile generate > /etc/puppetlabs/code/environments/simp/Puppetfile.simp
+  163  simp puppetfile generate --skeleton > /etc/puppetlabs/code/environments/simp/Puppetfile
+  164  ls -la
+  165  chmod 640 Pup*
+  166  umask 0027
+  167  sg puppet -c '/usr/share/simp/bin/r10k puppetfile install --puppetfile /etc/puppetlabs/code/environments/simp/Puppetfile --moduledir /etc/puppetlabs/code/environments/simp/modules'
+
+

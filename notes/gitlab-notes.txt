@@ -1,0 +1,24 @@
+#  The config file for gitlab is /etc/gitlab/gitlab.rb  (well the main
+#  one anyways).  After making changes to this run:
+gitlab-ctl reconfigure
+
+# To check if ldap in gitlab is working:
+gitlab-rake -t gitlab:ldap:check
+
+# To check that the gitlab server OS  can connect to LDAP:
+ldapsearch -LLL  -y /root/ldap-bind-password.from-hiera  -x  -T ~/ -tt  -ZZ -h ldaps://tastypuppet.tasty.bacon -p 636 -D "cn=hostAuth,ou=Hosts,dc=tasty,dc=bacon"
+
+# To connect to the gitlab console via command line:
+gitlab-rails c
+
+#Once in at the IRB prompt to check LDAP:
+
+user = User.find_by(username: 'john')
+adapter = ::Gitlab::Auth::LDAP::Adapter.new('ldapmain')
+Gitlab::Auth::LDAP::Person.find_by_dn(user.ldap_identity.extern_uid, adapter)
+
+
+## 
+After 6.3.updated need to change slapd.conf file on ldapserver  to 128 so gitlab could connect:
+security ssf=128 tls=128 update_ssf=128 simple_bind=128 update_tls=128
+

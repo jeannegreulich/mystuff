@@ -1,0 +1,3 @@
+If your MATE is slow then make sure that file sharing over ssh is turned off
+in the preferences of xclient session.
+

@@ -1,0 +1,2 @@
+To install nokogiri must have gcc ruby-devel zlib-devel and gmp gmpdev
+

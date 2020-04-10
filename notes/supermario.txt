@@ -1,0 +1,22 @@
+supermario 1 -8
+
+RAM:  125G 
+CPU:  40
+   2 sockets
+   10 cores/socket
+   2 threads per core  
+
+DISK space:  6 1-TiB = 5 TB in practice
+TPM = no
+
+supermario 9 -16
+
+RAM: 125G
+CPU:  40
+   2 sockets
+   10 cores/socket
+   2 threads per core  
+
+   2 225GiB  = 450GB space 
+
+

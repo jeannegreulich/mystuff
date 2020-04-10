@@ -1,0 +1,7 @@
+#
+Firewalld cannot take hostnames and there is no conversion function (like the one in simp for iptables).  You must make sure that any lists you pass into firewalld (or iptables shim for firewalld ) are all ipdresses (CIDR DDR format ok)
+
+The shim will convert calls to iptables::rule but if you call the type iptables_rule
+directly it will create an iptables rule that has no affect.  So search your puppet code for iptables_rule.
+
+

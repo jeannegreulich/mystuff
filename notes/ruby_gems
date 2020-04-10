@@ -1,0 +1,10 @@
+mkdir repo
+mkdir repo/gems
+cp *.gem repo/gems
+cd repo
+gem generate_index
+(I built mine in /home/jgreulich/repo
+
+Then
+GEM_SERVERS="file:///home/jgreulich/repo,https://rubygems.org"  
+before your build.

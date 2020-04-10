@@ -1,0 +1,7 @@
+systemctl stop nails cma ma
+rpm -e McAfeeVSEForLinux-2.0.3.29216-29216.x86_64
+rpm -e ISecGRt-10.0.0-2168.x86_64
+rpm -e McAfeeFilesForVSE-2.0.3.29216-0.x86_64
+rpm -e MFEcma-5.6.1-157.x86_64 MFEdx-5.0.1-222.x86_64 MFErt-2.0-44.i686
+rm -rf /var/McAfee/ /opt/McAfee/
+

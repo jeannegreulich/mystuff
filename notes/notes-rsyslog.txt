@@ -1,0 +1,22 @@
+Debug for rsyslog:
+
+stop the service and set:
+
+export RSYSLOG_DEBUG="Debug"
+export RSYSLOG_DEBUGLOG="/var/log/rsyslog.debug"
+
+if you want detailed certificate checking then in your global.conf file add the line:
+
+global(debug.gnutls="10" debug.logFile="/var/log/rsyslogdebug")
+
+
+now start rsyslog from the command line with 
+     rsyslog -dn
+
+
+(this will print it all to the screen and save the out put to the defined files above if you want to search it all.)
+
+NOTE Setting RSYSLOG_DEBUG is processed earlier in the startup than command line
+                     options (i.e. -d) and as such enables earlier debugging
+                     output. Mutually exclusive with DebugOnDemand
+

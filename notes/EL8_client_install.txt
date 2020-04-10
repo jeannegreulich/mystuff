@@ -1,0 +1,15 @@
+1)  If you are not updating the kick start server, you need to update the
+    simp_bootstrap_client files. 
+
+2) Set simp_options::tcpwrappers to false for all el8 systems:
+     data/CentOS/8.yaml
+
+3) set firewalld backend to iptables data/default.yaml
+
+4) create SIMP_el8 repo on tastybacon with el8 rpms for puppet.
+
+5) Updated kickstart and dhcp for el8.  (pupclient...el8 and repodetect_el8.)
+   Disable McAfee install on all systems about to kickstart 
+   just put simp::classes: --mcafee_agent --mcafee_vse in data/CentOS/8.yaml for
+   now.
+

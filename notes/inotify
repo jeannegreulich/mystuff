@@ -1,0 +1,27 @@
+
+Do echo 1 >> /sys/kernel/debug/tracing/events/syscalls/sys_exit_inotify_add_watch/enable to enable tracing of watch adds;
+Do cat /sys/kernel/debug/tracing/tracing_enabled to make sure it's set to 1 and if it isn't do echo 1 >> /sys/kernel/debug/tracing/tracing_enabled;
+Restart the processes with inotify instances (determined as described in Petr Uzel's answer) that you suspect of creating a lot of watches; and
+Read the file /sys/kernel/debug/tracing/trace to watch how many watches are created and by which processes.
+
+
+lsof | grep -i inotify
+
+#To fix out of space when running systemctl or tail -f
+Permanent solution (preserved across restarts) Adding line:
+
+fs.inotify.max_user_watches=1048576
+
+to:
+
+/etc/sysctl.conf
+
+fixed the limit value permanently (even between restarts).
+
+then do a
+
+sysctl -p
+
+more details on troubleshooting:
+
+http://peter-butkovic.blogspot.com/2013/08/tail-inotify-resources-exhausted.html
