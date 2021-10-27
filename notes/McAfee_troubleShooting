@@ -37,3 +37,10 @@
   510  systemctl status ma cma nail
   511  /opt/McAfee/agent/bin/cmdagent -p; tail -f /var/McAfee/agent/logs/*.log
 
+
+If McAfee is in standalone mode then the provisioningdid not work.  yo can run 
+/opt/McAfee/agent/bin/cmdagent -provision -managed -dir /var/McAfee/agent/keydata -nostart
+
+If there is nothing in /var/McAfee/agent/keydata, then reinstall MAProvision*.   That is what installs those files but McAfee removes them after the install is complete.
+
+

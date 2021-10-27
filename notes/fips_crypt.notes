@@ -1,0 +1,100 @@
+LdTLh0oZdup8PLLpEkM2eTTh5IErFpJ3pH1HWnMqj0ueIFavoSXdo4kRnCKYGCAIOPxl7X8QBKFveOBJMJq3EiGdlp
+FXN3TTz61UdfVwfGOdpejHQERo7XoCmgHWFX4G65rhfvdgL294ffK2JWzcSIw2eTR900HsNkes2ZkrJEgF9bltnfhN
+HCQPCcCsVTnPxsVKfW9cDSUxxm0qAsYTrqp54xIBEfulKSDPefDZxtHWUnpQw6PT9jrjAHkGq0EDdwN3eHEnbGpmAF
+fizH1q16eta6O7p2GeAblTPBEL2ZvGsTTyjyVpR2ATDpGEqUk276pppVMuOQxWc5U3rexywdtS754wDlR7StHY0MEe
+IDz8BYjNcaGvvJQ7uSfawzQ7RhYnixj5i4JVgKs5CCXvpbm8TimZqkSgeT0QFTTEC8gVvXDSdAw5XECQ7x1yV6X3Om
+k0wp3xsbypKZQjgCDNnkZN4P320aTM1tDP6qx1IEAiyOEA6s7eMA3avC1y6KwokVwGLrw1iVRTkFvujXawXsB7lPYA
+kBtHxN8jsEBxuHceZo7lNplX8sSv5vSivhQOlMkXxmUndiJhrHQJflrvN6DAya1Cf9UMFgT09S1KRTaYJt4HQpbPsu
+MxpVVw9Anx5lTvqL9KCvDrKm9325D70GyeMGZ4jhsUthGAraMiksqqBFDTiLTWJlVIhea74pfXPwi1c5Fju4ABB6uc
+mqvzP0cU5MUsbsNCBJjiOPT1lPaanDVigckurSfDLczEYGZGRFnRzY8uDm7OgJdpvDmUsOYXcc2AchMNJU87G0oT7W
+zgGRyMfRLS9c2cFNs79iCR2MAJPnEPscVc4YNZlKu8FV8s3ZhTsYPlCGsCkLgJSzWyjJE0Qrq3kSiCr0pr5e864C6D
+JnmkmsbBYoAER6mE747Euvll0H5Oze5yMRRH9r3qsWVwIlTH1OzpjmV7J0yi96YQ1tIvpb2jcjMcmVqweKMQiVtq6Y
+J5U2XP2I4ZqZ02mbGSr17BBTnFPvVC1kG6
+
+
+
+LUKS header information for /dev/vda3
+
+Version:        1
+Cipher name:    aes
+Cipher mode:    cbc-essiv:sha256
+Hash spec:      sha256
+Payload offset: 4096
+MK bits:        256
+MK digest:      bd b4 68 e2 db 2e 0a 07 bf 2a 75 dd 2e 43 39 ae 96 64 60 fe 
+MK salt:        bf 9c 88 6b 40 2a a5 dd 7c e1 61 1f aa fa 4f dc 
+                13 50 e0 15 2b 21 5d fa 00 66 87 d6 38 d0 52 2b 
+MK iterations:  17500
+UUID:           a97ce529-fc9a-4bf6-8943-61ed67099ad4
+
+Key Slot 0: ENABLED
+  Iterations:           140034
+  Salt:                 4b 7e be 9c df a3 20 28 7a 88 05 1e b7 ae d2 2f 
+                          c0 5c be da b0 25 6d e1 db 09 c4 36 14 8f b4 1b 
+  Key material offset:  8
+  AF stripes:             4000
+Key Slot 1: DISABLED
+Key Slot 2: DISABLED
+Key Slot 3: DISABLED
+Key Slot 4: DISABLED
+Key Slot 5: DISABLED
+Key Slot 6: DISABLED
+Key Slot 7: DISABLED
+
+-----------------------------------------------------------------------------------------:
+/etc/dracut.conf
+
+ PUT YOUR CONFIG HERE OR IN separate files named *.conf
+# in /etc/dracut.conf.d
+# SEE man dracut.conf(5)
+
+# Sample dracut config file
+
+#logfile=/var/log/dracut.log
+#fileloglvl=6
+
+# Exact list of dracut modules to use.  Modules not listed here are not going
+# to be included.  If you only want to add some optional modules use
+# add_dracutmodules option instead.
+#dracutmodules+=""
+
+# dracut modules to omit
+#omit_dracutmodules+=""
+
+# dracut modules to add to the default
+#add_dracutmodules+=""
+
+# additional kernel modules to the default
+#add_drivers+=""
+
+# list of kernel filesystem modules to be included in the generic initramfs
+#filesystems+=""
+
+# build initrd only to boot current hardware
+#hostonly="yes"
+#
+
+# install local /etc/mdadm.conf
+#mdadmconf="no"
+
+# install local /etc/lvm/lvm.conf
+#lvmconf="no"
+
+# A list of fsck tools to install. If it's not specified, module's hardcoded
+# default is used, currently: "umount mount /sbin/fsck* xfs_db xfs_check
+# xfs_repair e2fsck jfs_fsck reiserfsck btrfsck". The installation is
+# opportunistic, so non-existing tools are just ignored.
+#fscks=""
+
+# inhibit installation of any fsck tools
+#nofscks="yes"
+
+# mount / and /usr read-only by default
+#ro_mnt="no"
+
+# set the directory for temporary files
+# default: /var/tmp
+#tmpdir=/tmp
+install_items+="/etc/.cryptcreds"
+
+-----------------------------------------------------------

@@ -1,0 +1,6 @@
+if iptables is not removing or changing entries you need to et precise match.
+
+For some reason it does a count of types to quicken things  and if all you are doing is changing the port it won't relize it needs to be changed.
+
+You can also flush all the rules and it will then recreate them correctly but setting the precise match parameter will always do it but it is slower.
+

@@ -1,0 +1,13 @@
+1) Update Centos
+- unpack_dvd
+2) Update SIMP repos
+- unpack_dvd
+
+2020-10-05T12:53:05.129914+00:00 proxy.tasty.bacon mcstransd: Failed to get context of client process (pid=14992)
+2020-10-05T12:53:05.129945+00:00 proxy.tasty.bacon mcstransd: Servicing of request failed for fd (6)
+ set selinux::manage_mcstrans_service: true
+
+Firewalld 
+
+firewalld::firewall_backend: iptables
+

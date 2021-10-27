@@ -1,0 +1,23 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific aliases and functions
+
+source $HOME/.profile
+
+export LIBVIRT_DEFAULT_URI=qemu:///system
+#export PYTHONPATH=/usr/lib/python2.6/site-packages/
+alias lsla='ls -la'
+alias mroe=more
+alias mockit='chmod -R g+rX $1;chown -R :mock $1'
+
+alias gitb='git branch'
+alias gitr='git remote -v'
+alias gitc='git commit'
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+alias grep='grep --color=auto'
+alias findit="grep --color=auto --exclude-dir='.git' -rli $1"

@@ -20,5 +20,11 @@ virsh snapshot-revert <domain-name> <snapshot name>
 
 virsh snapshot-delete <domain-name> <snapshot name>
 
+Virtual Machine Manager:
+  if you are getting an error that the response is to large and it expects something
+  smaller, your .bashrc (or what ever shell you are using to log in) is probably spitting
+  somthing out that is unexpected.  remove that from your .bashrc and it should work.
+
+
 
 

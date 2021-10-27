@@ -1,0 +1,46 @@
+
+copy iso local and mount to directory ie /iso
+
+create iso.repo in /etc/yum.repos.d with content:
+
+[xBaseOS]
+name=CentOS Linux 8
+mediaid=None
+metadata_expire=-1
+gpgcheck=0
+cost=500
+baseurl=file:///iso/BaseOS
+enabled=0
+
+[xAppStream]
+name=CentOS Linux 8
+mediaid=None
+metadata_expire=-1
+gpgcheck=0
+cost=500
+baseurl=file:///iso/AppStream
+enabled=0
+
+Create your directories under /var/www/yum:
+
+CentOS/8.2/x86_64/BaseOS
+CentOS/8.2/x86_64/AppStream
+
+dnf install yum-utils
+#reposync -p /var/www/yum/CentOS/8/x86_64/AppStream/ --norepopath --download-metadata --repo xAppStream
+#reposync -p /var/www/yum/CentOS/8/x86_64/BaseOS/ --norepopath --download-metadata --repo xBaseOS
+# The above was not creating the repodata.   Chris said to try the following:
+reposync -p /var/www/yum/CentOS/8/x86_64/AppStream/ --norepopath --add-metadata --repo xAppStream
+reposync -p /var/www/yum/CentOS/8/x86_64/BaseOS/ --norepopath ---add-metadata --repo xBaseOS
+
+chown -R root:apache /var/www/yum/; chmod -R g+rX /var/www/yum/;
+chcon -R chcon -R -t httpd_sys_content_t yum
+chcon -R -u system_u yum
+
+
+You need to create repo data:
+# create the repo data
+createrepo -g *comps*.xml ./
+# Then update the module data in the repo.
+gunzip *-modules.yaml.gz -c > modules.yaml
+modifyrepo modules.yaml repodata/

@@ -1,0 +1,47 @@
+Initialize settings:
+@base_dir = run time directory but can be set as variable so bsimp-core
+@run_dir  = Directory run from ( so simp-core)
+@build_dir =  bsimp-core/build 
+              reset if distributions exists to:  bsimp_core/build/distributions/<os>/<rel>/<arch>
+
+@src_dir = bsimp-core/src
+@spec_dir = bsimp-core/src/spec
+@spec_file = bsimp-core/src/spec/*.spec
+@simp_version = bsimp-core/src/assets/simp/build/simp.spec .full_version
+@simp_dvd_dirs = SIMP,ks Config
+
+@distro_build_dir = bsimp_core/build/distributions/<os>/<rel>/<arch>
+@dvd_src = bsimp_core/build/distributions/<os>/<rel>/<arch>/DVD
+@dvd_dir = bsimp_core/build/distributions/<os>/<rel>/<arch>/DVD_Overlay
+
+@dist_dir = if distribution exists
+                 bsimp_core/build/distributions/<os>/<rel>/<arch>/dist
+            else
+                 bsimp-core/build/dist
+@rpm_dir  = if distribution exists
+                 bsimp_core/build/distributions/<os>/<rel>/<arch>/SIMP/RPMS
+            else
+                 bsimp-core/build/SIMP/RPMS
+
+          version = @build_version
+          arch = @build_arch
+
+output_dir = args[:output_dir].sub(/^$/, File.expand_path( 'SIMP_ISO', @distro_build_dir ))
+
+            staging_dir = ENV.fetch('SIMP_BUILD_staging_dir', File.expand_path( 'SIMP_ISO_STAGING', @distro_build_dir ))
+
+overlay_dir = File.join(@distro_build_dir, 'DVD_Overlay')
+
+yaml_file = File.expand_path('release_mappings.yaml', @distro_build_dir)
+
+tar_file = File.join(overlay_dir, "SIMP-#{@simp_version}-#{distro}-#{version}-#{arch}.tar.gz")
+
+1) Check for tar file in DVD_overlay directory
+     If the tar file exists and you want to use it
+         if it exist and you want to use it:
+           do_docs = false
+           do_checkout = false
+           do_bundle = false
+     else
+        create the tar file:
+          

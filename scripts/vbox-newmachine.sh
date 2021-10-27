@@ -40,25 +40,25 @@ v1|1)  NW="vboxnet1"
      vport=5100
      addr=1
      if [[ $version == "67" ]]; then
-       macprefix="AABBCCAA00"
+       macprefix="AABBAAAA00"
      else
-       macprefix="AABBCCAA00"
+       macprefix="AABBAABB00"
      fi
 ;;
 v4|4)  NW="vboxnet4"
      vport=5400
      addr=4
      if [[ $version == "67" ]]; then
-       macprefix="AABBCCDD00"
+       macprefix="AABBBBAA00"
      else
-       macprefix="AABBCCDD00"
+       macprefix="AABBBBBB00"
      fi
 ;;
-v3|3)  NW="vboxnet3"
+v3|3)  NW="vboxnet0"
      vport=5300
      addr=3
      if [[ $version == "67" ]]; then
-       macprefix="AACCCCAA00"
+       macprefix="AABBCCCC00"
      else
        macprefix="AABBCCCC00"
      fi
@@ -67,18 +67,18 @@ v2|2)  NW="vboxnet2"
      vport=5200
      addr=2
      if [[ $version == "67" ]]; then
-       macprefix="AACCCCBB00"
+       macprefix="AABBDDAA00"
      else
-       macprefix="AACCCCBB00"
+       macprefix="AABBDDBB00"
      fi
 ;;
 *)  NW="vboxnet0"
      vport=5000
      addr=0
      if [[ $version == "67" ]]; then
-       macprefix="AABBCCDD00"
+       macprefix="AABBEEAA00"
      else
-       macprefix="AABBBBDD00"
+       macprefix="AABBEEBB00"
      fi
 ;;
 esac
@@ -86,17 +86,13 @@ esac
 vrdeport=$(($vport + $num))
 echo "Using vrdeport $vrdeport"
 case $version in
-6)  CDROM="/net/ISO/Distribution_ISOs/CentOS-6.9-x86_64-bin-DVD1.iso"
-;;
 7)  CDROM="/net/ISO/Distribution_ISOs/CentOS-7-x86_64-DVD-1708.iso"
 ;;
 8)  CDROM="/net/ISO/Distribution_ISOs/CentOS-8-x86_64-1905-dvd1.iso"
 ;;
-66)  CDROM="$isodir/simp6-centos6.iso"
-;;
 67)  CDROM="$isodir/simp6-centos7.iso"
 ;;
-68)  CDROM="$isodir/simp6-centos7.iso"
+68)  CDROM="$isodir/simp6-centos8.iso"
 ;;
 R7)  CDROM="$isodir/rhel-server-7.3-x86_64-dvd.iso"
 ;;
@@ -136,7 +132,8 @@ VBoxManage storagectl $VM --name "IDE Controller" --add ide  --bootable on
 VBoxManage storageattach $VM --storagectl "IDE Controller" --port 0 --device 0 --type hdd --medium $VMDISK
 echo "turn on vrde"
 VBoxManage modifyvm $VM --vrde on
-VBoxManage modifyvm $VM --vrdeauthtype null
+VBoxManage modifyvm $VM --vrdeport $vrdeport
+#VBoxManage modifyvm $VM --vrdeauthtype null
 if [ -z $4 ]; then
   VBoxManage modifyvm $VM --firmware bios
 else
@@ -166,26 +163,17 @@ else
  fill=""
  MACADDR="$macprefix$fill$1"
  RAM=2048
- VBoxManage modifyvm $VM --boot1 disk --boot2 net --boot3 net --boot4 none
+ VBoxManage modifyvm $VM --boot1 disk --boot2 net --boot3 none --boot4 none
 fi
-
 VBoxManage modifyvm $VM --memory $RAM --vram 128
 VBoxManage modifyvm $VM --nic1 hostonly
 #VBoxManage modifyvm $VM --nictype1='virtio'
 VBoxManage modifyvm $VM --audio none
 
-#set the network boot priority so it use the hostonly network to PXE
-#VBoxManage modifyvm $VM --nicbootprio1 4
-#VBoxManage modifyvm $VM --nicbootprio2 1
+VBoxManage modifyvm $VM --nicbootprio1 1
 VBoxManage modifyvm $VM --macaddress1 $MACADDR
 VBoxManage modifyvm $VM --hostonlyadapter1 $NW
 #VBoxManage modifyvm $VM --vrdemulticon on
-VBoxManage modifyvm $VM --vrdeaddress 127.0.0.1
-VBoxManage modifyvm $VM --vrdeport $vrdeport
-VBoxManage modifyvm $VM --vrdeauthtype 'null'
-#VBoxManage modifyvm $VM --vrdeproperty "Security/Method=negotiate"
-#VBoxManage modifyvm $VM --vrdeproperty "Security/CACertificate=/etc/pki/simp/x509/cacerts/cacerts.pem"
-#VBoxManage modifyvm $VM --vrdeproperty "Security/ServerCertificate=/etc/pki/simp_apps/packer/packer-vagrant.pub"
-#VBoxManage modifyvm $VM --vrdeproperty "Security/ServerPrivateKey=/etc/pki/simp_apps/packer/packer-vagrant.pem"
+VBoxManage modifyvm $VM --vrde on
 
 VBoxManage startvm $VM --type headless

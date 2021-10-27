@@ -1,0 +1,14 @@
+#Check that virtualization is enabled.  (Expect to see Virtualization:        VT-x)
+lscpu | grep Virtualization
+# Install the repos  (These are more up to date then what is avable on CentOSrepos
+# and have the ability to run UEFI  machines for testing)
+yum install centos-release-qemu-ev --enablerepo=extras
+#Install qemu-kvm-ev and it dependencies
+yum install qemu-kvm-ev --enablerepo=epel,base,updates,centos-qemu-ev
+#Install libvirt
+yum install libvirt libvirt-python libguestfs-tools virt-install --enablerepo=base,updates
+# Enable libvirtd
+systemctl enable libvirtd
+#make sure bridge utils is installed
+yum install  bridge-utiles --enablerepo=base
+

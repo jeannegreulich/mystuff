@@ -11,10 +11,10 @@ IFS='' read -r -d ''  JIRADATA <<EOF
       "key": "SIMP"
     },
     "parent": {
-      "key": "SIMP-7456"
+      "key": "SIMP-10204"
     },
     "components": [ { "name": "$x" } ],
-    "summary": "Update $x to EL8 - simp extras",
+    "summary": "Update $x inodeset to 8.4",
     "description": "Update the module to support El8 as described in parent ticket. Make sure all tests unit and acceptance run",
     "issuetype": {
       "id": "5"

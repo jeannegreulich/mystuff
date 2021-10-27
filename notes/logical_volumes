@@ -1,0 +1,4 @@
+#
+Do a man on lvm to  find out move commands that are helpful.
+
+/usr/sbin/lvm pvscan --cache --activate ay

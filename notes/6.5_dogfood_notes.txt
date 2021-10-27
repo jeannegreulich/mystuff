@@ -1,0 +1,6 @@
+#
+Since we are not delivering docker, I added it to our Puppetfile.
+
+Had  add ssh to site module deps and  update the parameters to the  correct values.
+
+

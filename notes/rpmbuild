@@ -1,0 +1,20 @@
+https://rogerwelin.github.io/rpm/rpmbuild/2015/04/04/rpmbuild-tutorial-part-1.html
+
+- to determine what system variable for rpm are:
+    rpm --eval %{_bindir}
+
+
+create a directory with your source 
+   packer-1.6.5/packer
+   tar cvfz packer-1.6.5-0.tar.gz
+
+
+
+rpmbuild -bb rpmbuild/SPECS/packer.spec
+
+gpg --list-keys
+
+in ~/.rpmmacros
+%_gpg_name Jeanne Greulich SIMP RPM Signing key (Key used to signed packages for install on systems) <jeanne.greulich@onyxpoint.com>
+
+rpm --addsign <packagename>

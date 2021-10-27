@@ -1,0 +1,65 @@
+1) update to yum server:
+     update unpack dvd from new simp-utils
+     uninstall new SIMP ISO.
+   for EL* the yum server must be on EL8 server to get the new tools.
+   I moved SIMP/* to SIMP/CentOS/7 and create SIMP/CentOS/8 and got the puppet
+   rpm from the puppet site because we don't have an EL8 ISO yet.
+
+   Look at extract_centos_8_iso_to_yum instructions.
+
+
+2) update the repodetect script on the ks server
+3) update the ks files on ks server
+4) update tftpfiles in site manifest
+
+
+5) hiera updates:
+
+a) add simp::sssd::client:ldap_server_type: 'plain'
+
+b) make sure the repo information is correct:
+   the repos set up via 6.6.0 simp are SIMP/CentOS/8/x86_64 not just SIMP/x86_64.
+
+C) simp::yum::repo::local_simp::extra_gpgkey_urls:
+  - https://10.0.71.108/yum/SIMP/GPGKEYS/RPM-GPG-KEY-puppet-20250406
+
+
+d) move simp_options::ntpd::servers to simp_options::ntp::servers
+  (set up alias  simp_options::ntpd::servers to simp_options::ntp::servers)
+
+e)  NOTES FOR UPGRADE: The local domain was configured by default in earlier
+  +      versions of SIMP because sssd would not start without a domain. A "LOCAL"
+  +      entry was added to the list of sssd domains to create in hiera. You will
+  +      need to remove this domain from the list of domains in hiera unless you
+  +      are configuring a "LOCAL" domain somewhere else in your puppet code. The
+  +      hiera variable is sssd::domains. If you do not remove this domain from the
+  +      list of domains in hiera and are not configuring it yourself sssd will
+  +      fail to start because it will not find a provider for the "LOCAL" domain.
+
+6) El6 is no longer supported.  In most modules this won't matter.
+   - gnome  parameters changed and EL6 gconf parameters were removed.
+
+7) Rsyslog  - nolonger support rsyslog version 7 must use 8.60 or later.
+    
+
+Actual steps:
+1)  mount the ISO and install simp-utils, simp-gpgkeys
+    - copy new dev key to /var/www/yum/SIMP-Dev
+      (Why doesn't unpack_dvd do this?)
+
+2) Extract ISO, remove SIMP/noarch and SIMP/x86_64
+   link SIMP/CentOS/7/[noarch, x86_64] to SIMP
+3) Update hiera and run puppet.
+   
+4) Yum update
+
+
+(Snapshot)
+
+update Puppetfile.simp and deploy
+(no problems)
+
+Error when using experimental repos:
+  rror: Could not update: Execution of '/usr/bin/dnf -d 0 -e 1 -y install rsyslog-gnutls' returned 1: Error: Unable to find a match: rsyslog-gnutls
+Error: /Stage[main]/Rsyslog::Install/Package[rsyslog-gnutls]/ensure: change from 'purged' to 'latest' failed: Could not update: Execution of '/usr/bin/dnf -d 0 -e 1 -y install rsyslog-gnutls' returned 1: Error: Unable to find a match: rsyslog-gnutls
+

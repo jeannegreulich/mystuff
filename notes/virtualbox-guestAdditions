@@ -1,0 +1,17 @@
+- mount the ISO in /net/ISO/Distrution_ISOs/virtualbox
+fo rhte correct version
+
+dnf install  epel-release
+dnf --enablerepo=epel  install gcc make perl kernel-devel kernel-headers bzip2 dkms
+
+make sure your kernel version and the kernel version headers match
+reboot if you just reinstalled anything 
+
+run ./VBoxLinuxAdditions.run
+
+TO get rid of value error:
+
+   semanage fcontext -d /opt/VBoxGuestAdditions-<version?/other/mount.vboxsf
+   restorecon /opt/VBoxGuestAdditions-<version>/other/mount.vboxsf
+
+

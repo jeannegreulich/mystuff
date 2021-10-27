@@ -1,0 +1,15 @@
+%s/pwdAccountLockedTime/accountUnlockTime/g
+%s/objectClass: ldapPublicKey/objectClass: nsAccount/g
+$s/sshPublicKey/nsSshPublicKey/g
+sed -i "/\b\(entryUUID\)\b/d" ./tb_new_edit.ldif 
+sed -i "/\b\(entryCSN\)\b/d" ./tb_new_edit.ldif 
+sed -i "/\b\(pwdChangedTime\)\b/d" ./tb_new_edit.ldif
+ldapdelete -x -y /usr/share/puppet_ds389_config/puppet_default_ds_pw.txt  -H ldaps://el8test4.tasty.bacon -D "cn=Directory_Manager"  'cn=users,ou=Group,dc=tasty,dc=bacon'
+ldapdelete -x -y /usr/share/puppet_ds389_config/puppet_default_ds_pw.txt  -H ldaps://el8test4.tasty.bacon -D "cn=Directory_Manager"  'cn=administrators,ou=Group,dc=tasty,dc=bacon'
+ldapadd -x -y /usr/share/puppet_ds389_config/puppet_default_ds_pw.txt  -H ldaps://el8test4.tasty.bacon -D "cn=Directory_Manager"  -f ./groups.ldif 
+
+
+n sssd.conf under ldap:   ldap_user_ssh_public_key = nsSshPublicKey
+
+temp password
+&&

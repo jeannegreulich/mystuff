@@ -3,7 +3,7 @@ require 'pry'
 
 where you want to stop (your break point)
 
-binding.pry  
+binding.pry
 
 
 cntl D will step you through.
@@ -14,13 +14,19 @@ cntl D will step you through.
 
 
 to install pry on a puppet agent
-   /opt/puppetlabs/puppet/bin/gem  install pry
+   /opt/puppetlabs/puppet/bin/gem  install pry --version '<= 012.2'
    /opt/puppetlabs/puppet/bin/gem  install pry-nav
       (and then make sure the permissions are correct
+for pry-byebug you need older versions:
 
-to install pry on the puppetserver 
+ /opt/puppetlabs/puppet/bin/gem install --version '<= 3.7.0' pry-byebug
+ /opt/puppetlabs/puppet/bin/gem install --version '<= 1.1.2' coderay
+ /opt/puppetlabs/puppet/bin/gem install --version '<= 0.9.2' method_source
+
+
+to install pry on the puppetserver
   sudo puppetserver gem install pry --no-ri --no-rdoc
 
   to see more on debugging puppetserver look at:
-  https://puppet.com/docs/puppetserver/5.1/dev_debugging.html 
+  https://puppet.com/docs/puppetserver/5.1/dev_debugging.html
 

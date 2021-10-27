@@ -1,0 +1,12 @@
+### beaker vagrant can't ssh into a machine ###
+Can't get  beaker to work because the alogirthms for ssh don't match.  
+Windows winrm is only using ssh-dss:
+
+Add the following to the windows node in the nodeset:
+
+    ssh:
+      append_all_supported_algorithms: true
+
+Beaker merges the ssh: options to provide a call to Net::SSH.   To see other options NetSSH uses  see  the gem net-ssh-<version>/lib/net/ssh.rb
+
+it tells you the options the gem will accept.

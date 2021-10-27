@@ -1,0 +1,13 @@
+For redhat 8:
+
+subscription-manager register
+   enter your user name and passord
+
+subscription-manager attach --auto
+  # this will attach you to all available repos
+
+subscription-manager repos 
+  # this will list all available repos
+
+subscription-manager unregister
+

@@ -1,0 +1,7 @@
+To change the nat network used by a virtual box system brought up by vagrant:
+
+shut it down and run:
+
+vbox modifyvm vagrant_puppetserver_1613509022731_14051 --natnet1 "10.0.3/24"
+
+

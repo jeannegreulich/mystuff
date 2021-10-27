@@ -1,0 +1,27 @@
+On store4 I did the following to make --boot uefi work:
+
+Install the firmware code:
+   I see mentions of qemu-efi to install ovmf but I couldn't find it.  I install the edk2 packages.
+
+1)  set up repo:
+   cd /etc/yum.repos.d/ && wget http://www.kraxel.org/repos/firmware.repo
+
+2) Install firmware package:
+   yum install edk2.git-ovmf-x64 -y
+
+3) Add firmware path to qemu:
+   vim /etc/libvirt/qemu.conf
+
+  uncomment the nvram line and  add path to OVMF_CODE:
+
+ nvram = [
+   "/usr/share/OVMF/OVMF_CODE.fd:/usr/share/OVMF/OVMF_VARS.fd",
+   "/usr/share/OVMF/OVMF_CODE.secboot.fd:/usr/share/OVMF/OVMF_VARS.fd",
+   "/usr/share/AAVMF/AAVMF_CODE.fd:/usr/share/AAVMF/AAVMF_VARS.fd",
+   "/usr/share/AAVMF/AAVMF32_CODE.fd:/usr/share/AAVMF/AAVMF32_VARS.fd",
+   "/usr/share/edk2.git/ovmf-x64/OVMF_CODE-pure-efi.fd:/usr/share/edk2.git/ovmf-x64/OVMF_VARS-pure-efi.fd"
+]
+ 
+4) restart libvirtd daemon:  systemctl restart libvirtd
+
+ 

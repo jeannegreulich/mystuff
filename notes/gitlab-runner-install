@@ -1,20 +1,15 @@
+u - gitlab-runner  -c 'rvm install 2.7.0; rvm use 2.7.0;gem install bundler; gem install bundler -v 2.2.6'
 
  su - gitlab-runner  -c 'gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB'
  yum install -y autoconf automake bison gcc-c++ libffi-devel libtool readline-devel ruby sqlite-devel openssl-devel
  su - gitlab-runner  -c 'gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB'
  su - gitlab-runner  -c '\curl -sSL https://get.rvm.io | bash -s stable'
- su - gitlab-runner  -c 'rvm install 2.4.4'
- su - gitlab-runner  -c 'rvm install 2.4.9'
- su - gitlab-runner  -c 'rvm install 2.4.5'
- su - gitlab-runner  -c 'rvm install 2.5.5'
- su - gitlab-runner  -c 'rvm install 2.5.7'
- su - gitlab-runner -c 'gem install bundler'
- su - gitlab-runner  -c 'rvm use 2.5.5; gem install bundler -v 1.17.1'
- su - gitlab-runner  -c 'rvm use 2.5.7; gem install bundler -v 1.17.1'
- su - gitlab-runner  -c 'rvm use 2.4.9; gem install bundler -v 1.17.1'
- su - gitlab-runner  -c 'rvm use 2.4.5; gem install bundler -v 1.17.1'
- su - gitlab-runner  -c 'rvm use 2.4.4444; gem install bundler -v 1.17.1'
+ su - gitlab-runner  -c 'rvm install 2.5.7;rvm use 2.5.7; gem install bundler -v 1.17.1; gem install bundler -v 2.2.6; gem install bundler'
+ su - gitlab-runner  -c 'rvm install 2.5.5;rvm use 2.5.5; gem install bundler -v 1.17.1; gem install bundler -v 2.2.6; gem install bundler'
+ su - gitlab-runner  -c 'rvm install 2.4.9; rvm use 2.4.9; gem install bundler; gem install bundler -v 2.2.6; gem install bundler -v 1.17.1'
+ su - gitlab-runner  -c 'rvm install 2.7; rvm use 2.7;gem install bundler; gem install bundler -v 2.2.6'
 
+# Set up Virtual Box to create VMS on the big data drive.
 mkdir /bigdata/VirtualBoxVMs
 chown gitlab-runner /bigdata/VirtualBoxVMs
 su - gitlab-runner -c 'VBoxManage setproperty machinefolder /bigdata/VirtualBoxVMs'
@@ -103,4 +98,16 @@ environment = ["GIT_SSL_CAPATH=/etc/pki/simp_apps/tasty_gitlab_runner/x509/cacer
 
 
 For docker runner:
+su - gitlab-runner  -c 'rvm install 2.7.0; rvm use 2.7.0;gem install bundler; gem install bundler -v 2.2.6'
 environment = ["GIT_SSL_NO_VERIFY=1", "GIT_SSL_CAPATH=/etc/pki/simp_apps/tasty_gitlab_runner/x509/cacerts", "GIT_CURL_VERBOSE=0"]
+
+#update to 12.10.2
+yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm
+yum-config-manager --disable endpoint
+rm -f /etc/yum.repos.d/ius*
+yum remove git2u* -y
+yum install git -y --enablerepo=endpoint
+yum install  gitlab-runner-12.10.2 -y  --enablerepo=runner_gitlab-runner
+systemctl restart gitlab-runner
+
+

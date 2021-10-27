@@ -1,0 +1,33 @@
+
+export LDAPTLS_CACERT=/etc/pki/simp-testing/pki/cacerts/cacerts.pem 
+    8  export LDAPTLS_KEY=/etc/pki/simp-testing/pki/private/el8.tasty.bacon.pem 
+    9  export LDAPTLS_CERT=/etc/pki/simp-testing/pki/public/el8.tasty.bacon.pub 
+   10  vim /tmp/mod.ldif
+   11  vi /tmp/mod.ldif
+   12  ldapmodify -x -D 'cn=Directory_Manager' -w 's00perSekr!tP@ssw0rd'  -H ldaps://el8.tasty.bacon -f /tmp/mod.ldif 
+   13  ldapmodify -x -D 'cn=Directory_Manager' -w 's00perSekr!tP@ssw0rd'  -H ldaps://el8.tasty.bacon -b 'cn=config' "objectClass=nsslapdConfig" 
+   14  ldapsearch -x -D 'cn=Directory_Manager' -w 's00perSekr!tP@ssw0rd'  -H ldaps://el8.tasty.bacon -b 'cn=config' "objectClass=nsslapdConfig" 
+   15  ldapsearch -x -D 'cn=Directory_Manager' -w 's00perSekr!tP@ssw0rd'  -H ldaps://el8.tasty.bacon -b 'cn=config' "objectClass=nsslapdConfig"  > /tmp/fff
+   16  vim /tmp/fff
+   17  vi /tmp/fff
+   18  vi /tmp/mod.ldif 
+   19  ldapmodify -x -D 'cn=Directory_Manager' -w 's00perSekr!tP@ssw0rd'  -H ldaps://el8.tasty.bacon -f /tmp/mod.ldif 
+   20  ldapsearch -x -D 'cn=Directory_Manager' -w 's00perSekr!tP@ssw0rd'  -H ldaps://el8.tasty.bacon -b 'cn=config' "objectClass=nsslapdConfig"  > /tmp/fff
+   21  vi /tmp/fff
+   22  vi /tmp/mod.ldif 
+   23  ldapmodify -x -D 'cn=Directory_Manager' -w 's00perSekr!tP@ssw0rd'  -H ldaps://el8.tasty.bacon -f /tmp/mod.ldif 
+   24  ldapsearch -x -D 'cn=Directory_Manager' -w 's00perSekr!tP@ssw0rd'  -H ldaps://el8.tasty.bacon -b 'cn=config' "objectClass=nsslapdConfig"  > /tmp/fff
+   25  vim /tmp/fff
+   26  vi /tmp/fff
+   27  dsidm accounts user create
+   28  dsidm accounts user create --help
+   29  man dsidm
+   30  dsidm accounts user create  -b 'dn=test,dn=org' jim
+   31  dsidm   -b 'dn=test,dn=org' accounts user create
+   32* dsidm  -b 
+   33  dsidm   -b 'dn=test,dn=org' el8.tasty.bacon
+   34  dsidm   -b 'dn=test,dn=org' el8.tasty.bacon create user
+   35  dsidm   -b 'dn=test,dn=org' el8.tasty.bacon user create
+   36  dsidm   -b 'dn=test,dn=org' accounts user create
+   37  dsidm   -b 'dc=test,dc=org' accounts user create
+

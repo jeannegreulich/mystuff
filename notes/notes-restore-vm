@@ -1,16 +1,17 @@
+# Copy the disks and xml to the new server.
+cp /var/backup/jmgserver220/2018-08-08.155323/* /var/VM/jmgserver220
 # create the machine from the config xml backup:
-virsh define --file /var/backup/jmgserver220/2018-08-08.155323/jmgserver220.xml 
-
-# list where its disk is
-virsh domblklist jmgserver220
-
-# remove the newly created disk
-ls -la /var/VM/jmgserver220/DISK-jmgserver220
-rm -f /var/VM/jmgserver220/DISK-jmgserver220
-
-# copy the backed up disk into place
-cp /var/backup/jmgserver220/2018-08-08.155323/DISK-jmgserver220  /var/VM/jmgserver220/DISK-jmgserver220
+virsh define --file /var/VM/jmgserver220/jmgserver220.xml
+# make sure permsionsion are ok:
+chown root:kvm   /var/VM/jmgserver220
+chmod 775 /var/VM/jmgserver220
+chown root:kvm   /var/VM/jmgserver220/*.xml
+chown qemu:qemu /var/VM/jmgserver220/Disk.qcow2
+chmod 664 /var/VM/jmgserver220/*
 
 # start the machine
 virsh start jmgserver220
+# make sure machie starts when host rebooted
+virsh  autostart jmgserver220
+
 
